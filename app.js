@@ -9,7 +9,7 @@ sampleApp.config(['$routeProvider', '$locationProvider',   
 		when('/',{
 			templateUrl: 'templates/list.html',
 			controller:'List'
-		})
+		}).
 		when('/AddNewOrder', {        
 			templateUrl: 'templates/add_order.html',
 			controller: 'AddOrderController'    
