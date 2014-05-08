@@ -29,6 +29,9 @@ sampleApp.controller('AddOrderController', function($scope) {         
 sampleApp.controller('ShowOrdersController', function($scope) {     
 	$scope.message = 'This is Show orders screen'; 
 });
-sampleApp.controller('otherUrl', function($scope) {
+sampleApp.controller('otherUrl', function($scope,$http) {
 	$scope.message = 'You are in here: '+location.pathname;
+	$http.get(location.pathname+".txt").success(function(data){
+		$scope.blogContent = data;
+	})
 });
