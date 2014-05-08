@@ -39,6 +39,15 @@
 		{{message}}
 		<div>{{blogContent}}</div>
 	</script>
+
+	<script type="text/ng-template" id="templates/list.html">
+		<ul>
+			<li ng-repeat="post in posts">
+				<h2>{{post.name}}</h2>
+				<p>{{post.summary}}</p>
+			</li>
+		</ul>
+	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script src="app.js"></script>
 

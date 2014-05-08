@@ -6,6 +6,10 @@ var sampleApp = angular.module('sampleApp', []); 
 sampleApp.config(['$routeProvider', '$locationProvider',   
 	function($routeProvider, $locationProvider) {    
 		$routeProvider.
+		when('/',{
+			templateUrl: 'templates/list.html',
+			controller:'List'
+		})
 		when('/AddNewOrder', {        
 			templateUrl: 'templates/add_order.html',
 			controller: 'AddOrderController'    
@@ -34,4 +38,9 @@ sampleApp.controller('otherUrl', function($scope,$http) {
 	$http.get(location.pathname+".txt").success(function(data){
 		$scope.blogContent = data;
 	})
+});
+sampleApp.controller('List',function($scope,$http){
+	$http.getJSON('/posts.json').success(function(data){
+		$scope.posts = data;
+	});
 });
