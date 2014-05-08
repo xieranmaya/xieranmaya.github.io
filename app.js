@@ -40,7 +40,7 @@ sampleApp.controller('otherUrl', function($scope,$http) {
 	})
 });
 sampleApp.controller('List',function($scope,$http){
-	$http.getJSON('/posts.json').success(function(data){
+	$http.get('/posts.json').success(function(data){
 		$scope.posts = data;
 	});
 });
