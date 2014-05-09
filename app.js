@@ -4,8 +4,10 @@ sampleApp.directive('markdown', function () {
     var converter = new Showdown.converter();
     return {
         restrict: 'EA',
+        priority: 0,
         link: function (scope, element, attrs) {
             var htmlText = converter.makeHtml(element.text());
+            console.log(htmlText);
             element.html(htmlText);
         }
     };
@@ -56,6 +58,8 @@ sampleApp.controller('AddOrderController', function ($scope) {
 }).controller('Post', function ($scope, $http, $routeParams){
 	$scope.postName = $routeParams.postname;
 	$http.get('/posts/'+$routeParams.postname).success(function(post){
-		$scope.postContent = post;
+	    var converter = new Showdown.converter();
+
+		$scope.postContent = converter.makeHtml(post);
 	});
 });
