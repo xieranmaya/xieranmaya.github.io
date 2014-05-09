@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-	
+
 	<head>
-		<title>AngularJS Routing example</title>
+		<title>Blog</title>
 		<base href="/" />
+		<link rel="stylesheet" href="bootstrap.css">
+		<!-- <link rel="stylesheet" href="stylesheets/stylesheet.css"> -->
+		<style>
+		body{
+			overflow-y: scroll;
+		}
+		</style>
 	</head>
-	
-	<body ng-app="sampleApp">
+
+	<body ng-app="Blog">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
 					<ul class="nav">
-						<li><a href="/AddNewOrder"> Add New Order </a>
+						<li><a href="/">Home</a>
 						</li>
-						<li><a href="/ShowOrders"> Show Order </a>
+						<li><a href="/pages">Pages</a>
+						</li>
+						<li><a href="/wtf/off">WTF</a>
 						</li>
 					</ul>
 				</div>
@@ -22,36 +31,35 @@
 				</div>
 			</div>
 		</div>
-
-		<script type="text/ng-template" id="templates/add_order.html">
-			<h2> Add Order </h2>
-			{{message}}
-		</script>
-		<script type="text/ng-template" id="templates/show_orders.html">
-			<h2> Show Orders </h2>
-			{{message}}
-		</script>
+		<!-- template start -->
 		<script type="text/ng-template" id="templates/otherUrl.html">
-			<h2> Show Orders </h2>
-			{{message}}
+			<h2></h2>
 			<div>{{blogContent}}</div>
 		</script>
-		<script type="text/ng-template" id="templates/list.html">
+		<script type="text/ng-template" id="templates/post-list.html">
 			<ul>
 				<li ng-repeat="post in posts">
-					<h2><a ng-href="/post/{{post}}">{{post}}</a></h2>
+					<h3><a ng-href="/post/{{post}}">{{post}}</a></h3>
 				</li>
 			</ul>
 		</script>
 		<script type="text/ng-template" id="templates/post.html">
 			<section>
-				<h2>{{postName}}</h2>
-				<div ng-bind-html-unsafe="postContent"><div>
+				<h2>{{post.title}}</h2>
+				<article ng-bind-html="post.content"></article>
 			</section>
 		</script>
-
+		<script type="text/ng-template" id="templates/pages.html">
+			<div>Page list</div>
+		</script>
+		<script type="text/ng-template" id="templates/404.html">
+			<div>Page Not Found.</div>
+		</script>
+		<!-- template end -->
 		<script src="showdown.js"></script>
-		<script src="angular.min.js"></script>
+		<script src="angular.js"></script>
+		<script src="angular-route.js"></script>
+		<script src="angular-sanitize.js"></script>
 		<script src="app.js"></script>
 	</body>
 

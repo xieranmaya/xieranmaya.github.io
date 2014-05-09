@@ -1,65 +1,59 @@
-var sampleApp = angular.module('sampleApp', []);
+var Blog = angular.module('Blog', ['ngRoute'])
 
-sampleApp.directive('markdown', function () {
+.directive('markdown', function () {
     var converter = new Showdown.converter();
     return {
         restrict: 'EA',
-        priority: 0,
+        priority: 10,
         link: function (scope, element, attrs) {
             var htmlText = converter.makeHtml(element.text());
             console.log(htmlText);
             element.html(htmlText);
         }
     };
-});
-sampleApp.config(['$routeProvider', '$locationProvider',
-	function ($routeProvider, $locationProvider) {
-		$routeProvider.
-		when('/', {
-			templateUrl: 'templates/list.html',
-			controller: 'List'
+})
+
+.config(function ($routeProvider, $locationProvider){
+	$routeProvider.
+		when('/', {// 主页，展示文章列表第一页
+			templateUrl: 'templates/post-list.html',
+			controller: 'PostList'
 		}).
-		when('/post/:postname',{
+		when('/pages',{// 页面列表
+			templateUrl: 'templates/pages.html'
+		}).
+		when('/page/:page',{// 页面
+			templateUrl: 'templates/page.html',
+			controller: 'Page'
+		}).
+		when('/:page',{// 文章列表翻页
+			templateUrl: 'templates/post-list.html',
+			controller: 'PostList'
+		}).
+		when('/post/:post',{// 文章页面
 			templateUrl: 'templates/post.html',
 			controller: 'Post'
 		}).
-		when('/AddNewOrder', {
-			templateUrl: 'templates/add_order.html',
-			controller: 'AddOrderController'
-		}).
-		when('/ShowOrders', {
-			templateUrl: 'templates/show_orders.html',
-			controller: 'ShowOrdersController'
-		}).
 		otherwise({
-			templateUrl: 'templates/otherUrl.html',
-			controller: 'otherUrl'
+			templateUrl: 'templates/404.html'
 		});
 
+	$locationProvider.html5Mode(true);
+})
 
-		$locationProvider.html5Mode(true);
-	}
-]);
-sampleApp.controller('AddOrderController', function ($scope) {
-	$scope.message = 'This is Add new order screen';
-}).controller('ShowOrdersController', function ($scope) {
-	$scope.message = 'This is Show orders screen';
-}).controller('otherUrl', function ($scope, $http) {
-	$scope.message = 'You are in here: ' + location.pathname;
-	$http.get(location.pathname + ".txt").success(function (data) {
-		$scope.blogContent = data;
-	});
-}).controller('List', function ($scope, $http) {
-	$http.get('/filelist.txt').success(function (data) {
-		posts = data.split('\n');
-		posts.pop();
+.controller('PostList', function ($scope, $http, $routeParams) {
+	$http.get('/post-list.txt').success(function (data) {
+		(posts = data.split('\n')).pop();
 		$scope.posts = posts;
 	});
-}).controller('Post', function ($scope, $http, $routeParams){
-	$scope.postName = $routeParams.postname;
-	$http.get('/posts/'+$routeParams.postname).success(function(post){
-	    var converter = new Showdown.converter();
+})
+.controller('Post', function ($scope, $http, $routeParams, $sce){
+	var converter = new Showdown.converter();
 
-		$scope.postContent = converter.makeHtml(post);
+	$scope.post = {};
+
+	$scope.post.title = $routeParams.post;
+	$http.get('/posts/'+$routeParams.post).success(function (post){
+		$scope.post.content = $sce.trustAsHtml(converter.makeHtml(post));
 	});
 });
