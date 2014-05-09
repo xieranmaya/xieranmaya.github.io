@@ -6,6 +6,6 @@ Number.md
 README.md
 StackEdit.md
 String.md
-first.txt
-hello.txt
-world.txt
+first.md
+hello.md
+world.md
