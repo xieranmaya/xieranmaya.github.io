@@ -2,4 +2,4 @@ world!
 
 # title   
 I'm using git hooks.   
-ÎÒÊÇ¸ö¼±ÐÔ×Ó¡£¡£¡£»¹Ã»¿´ÍêËµÃ÷¾Í¿ªÊ¼²âÊÔ¡£¡£¡£¡£   
+æˆ‘æ˜¯ä¸ªæ€¥æ€§å­ã€‚ã€‚ã€‚è¿˜æ²¡çœ‹å®Œè¯´æ˜Žå°±å¼€å§‹æµ‹è¯•ã€‚ã€‚ã€‚ã€‚   
