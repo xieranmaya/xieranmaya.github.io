@@ -30,21 +30,20 @@ sampleApp.config(['$routeProvider', '$locationProvider',
 ]);
 sampleApp.controller('AddOrderController', function ($scope) {
 	$scope.message = 'This is Add new order screen';
-});
-sampleApp.controller('ShowOrdersController', function ($scope) {
+}).controller('ShowOrdersController', function ($scope) {
 	$scope.message = 'This is Show orders screen';
-});
-sampleApp.controller('otherUrl', function ($scope, $http) {
+}).controller('otherUrl', function ($scope, $http) {
 	$scope.message = 'You are in here: ' + location.pathname;
 	$http.get(location.pathname + ".txt").success(function (data) {
 		$scope.blogContent = data;
-	})
-});
-sampleApp.controller('List', function ($scope, $http) {
-	$http.get('/filelist.txt').success(function (data) {
-		$scope.posts = data.split('\n');
 	});
-}).controller('Post',function($scope,$http,$routeParams){
+}).controller('List', function ($scope, $http) {
+	$http.get('/filelist.txt').success(function (data) {
+		posts = data.split('\n');
+		posts.pop();
+		$scope.posts = posts;
+	});
+}).controller('Post', function ($scope, $http, $routeParams){
 	$scope.postName = $routeParams.postname;
 	$http.get('/posts/'+$routeParams.postname).success(function(post){
 		$scope.postContent = post;
