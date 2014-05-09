@@ -1,5 +1,11 @@
+Array.md
+Event.md
+Function.md
+Hash.md
+Number.md
 README.md
 StackEdit.md
+String.md
 first.txt
 hello.txt
 world.txt
