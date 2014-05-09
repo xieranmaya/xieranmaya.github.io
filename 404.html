@@ -45,11 +45,12 @@
 		</script>
 		<script type="text/ng-template" id="templates/post.html">
 			<section>
-				<h1>{{postName}}</h1>
-				<article>{{postContent}}</article>
+				<h2>{{postName}}</h2>
+				<markdown>{{postContent}}</markdown>
 			</section>
 		</script>
 
+		<script src="showdown.js"></script>
 		<script src="angular.min.js"></script>
 		<script src="app.js"></script>
 	</body>

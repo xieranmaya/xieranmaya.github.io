@@ -1,5 +1,15 @@
 var sampleApp = angular.module('sampleApp', []);
 
+sampleApp.directive('markdown', function () {
+    var converter = new Showdown.converter();
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var htmlText = converter.makeHtml(element.text());
+            element.html(htmlText);
+        }
+    };
+});
 sampleApp.config(['$routeProvider', '$locationProvider',
 	function ($routeProvider, $locationProvider) {
 		$routeProvider.
