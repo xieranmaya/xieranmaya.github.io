@@ -1,4 +1,0 @@
-README.md
-first.txt
-hello.txt
-world.txt
