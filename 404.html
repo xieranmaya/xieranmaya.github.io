@@ -39,10 +39,15 @@
 		<script type="text/ng-template" id="templates/list.html">
 			<ul>
 				<li ng-repeat="post in posts">
-					<h2>{{post.name}}</h2>
-					<p>{{post.summary}}</p>
+					<h2><a ng-href="/post/{{post}}">{{post}}</a></h2>
 				</li>
 			</ul>
+		</script>
+		<script type="text/ng-template" id="templates/list.html">
+			<section>
+				<h1>{{postName}}</h1>
+				<article>{{postContent}}</article>
+			</section>
 		</script>
 
 		<script src="angular.min.js"></script>

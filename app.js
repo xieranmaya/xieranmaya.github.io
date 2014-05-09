@@ -7,6 +7,10 @@ sampleApp.config(['$routeProvider', '$locationProvider',
 			templateUrl: 'templates/list.html',
 			controller: 'List'
 		}).
+		when('/post/:postname',{
+			templateUrl: 'templates/post.html',
+			controller: 'Post'
+		}).
 		when('/AddNewOrder', {
 			templateUrl: 'templates/add_order.html',
 			controller: 'AddOrderController'
@@ -37,7 +41,12 @@ sampleApp.controller('otherUrl', function ($scope, $http) {
 	})
 });
 sampleApp.controller('List', function ($scope, $http) {
-	$http.get('/posts.json').success(function (data) {
-		$scope.posts = data;
+	$http.get('/filelist.txt').success(function (data) {
+		$scope.posts = data.split('\n');
+	});
+}).controller('Post',function($scope,$http,$routeParams){
+	$scope.postName = $routeParams.postname;
+	$http.get('/posts/'+$routeParams.postname).success(function(post){
+		$scope.postContent = post;
 	});
 });
