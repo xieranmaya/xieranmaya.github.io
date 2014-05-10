@@ -12,6 +12,13 @@ var Blog = angular.module('Blog', ['ngRoute'])
         }
     };
 })
+.filter('markdown',function ($sce){
+	var converter = new Showdown.converter();
+	return function (input){
+		console.log(input);
+		return $sce.trustAsHtml(converter.makeHtml(input));
+	};
+})
 
 .config(function ($routeProvider, $locationProvider){
 	$routeProvider.
@@ -47,13 +54,11 @@ var Blog = angular.module('Blog', ['ngRoute'])
 		$scope.posts = posts;
 	});
 })
-.controller('Post', function ($scope, $http, $routeParams, $sce){
-	var converter = new Showdown.converter();
-
+.controller('Post', function ($scope, $http, $routeParams){
 	$scope.post = {};
-
 	$scope.post.title = $routeParams.post;
 	$http.get('/posts/'+$routeParams.post).success(function (post){
-		$scope.post.content = $sce.trustAsHtml(converter.makeHtml(post));
+		//console.log(post);
+		$scope.post.content = post;
 	});
 });
