@@ -47,7 +47,7 @@
 		<script type="text/ng-template" id="templates/post.html">
 			<section>
 				<h2>{{post.title}}</h2>
-				<article>{{post.content|markdown}}</article>
+				<article ng-bind-html="post.content|markdown"></article>
 			</section>
 		</script>
 		<script type="text/ng-template" id="templates/pages.html">

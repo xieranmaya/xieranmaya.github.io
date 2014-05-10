@@ -15,7 +15,6 @@ var Blog = angular.module('Blog', ['ngRoute'])
 .filter('markdown',function ($sce){
 	var converter = new Showdown.converter();
 	return function (input){
-		console.log(input);
 		return $sce.trustAsHtml(converter.makeHtml(input));
 	};
 })
@@ -58,7 +57,6 @@ var Blog = angular.module('Blog', ['ngRoute'])
 	$scope.post = {};
 	$scope.post.title = $routeParams.post;
 	$http.get('/posts/'+$routeParams.post).success(function (post){
-		//console.log(post);
 		$scope.post.content = post;
 	});
 });
