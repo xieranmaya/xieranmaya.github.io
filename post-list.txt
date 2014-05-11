@@ -8,4 +8,5 @@ StackEdit.md
 String.md
 first.md
 hello.md
+resume.md
 world.md
