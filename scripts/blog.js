@@ -15,7 +15,10 @@ var Blog = angular.module('Blog', ['ngRoute'])
 .filter('markdown',function ($sce){
 	var converter = new Showdown.converter();
 	return function (input){
-		return $sce.trustAsHtml(converter.makeHtml(input));
+		if(input){
+			return $sce.trustAsHtml(converter.makeHtml(input));
+		}
+		return;
 	};
 })
 
