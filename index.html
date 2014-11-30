@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Blog">
+
+	<head>
+		<title>Blog</title>
+		<base href="/">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="styles/bootstrap.css">
+		<link rel="stylesheet" href="styles/blog.css">
+	</head>
+
+	<body ng-controllers="Blog">
+		<div class="blog-masthead">
+			<div class="container">
+			<nav class="blog-nav">
+				<a class="blog-nav-item active" href="/">Home</a>
+				<!-- <a class="blog-nav-item" href="#">New features</a>
+				<a class="blog-nav-item" href="#">Press</a>
+				<a class="blog-nav-item" href="#">New hires</a>
+				<a class="blog-nav-item" href="#">About</a> -->
+			</nav>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="blog-header" ng-controller="Blog">
+				<h1 class="blog-title" ng-cloak>{{meta.site_name}}</h1>
+				<p class="lead blog-description" ng-cloak>{{meta.site_sub_name}}</p>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-8 blog-main" ng-view></div>
+				<div class="col-sm-3 col-sm-offset-1">
+					<div class="sidebar-module sidebar-module-inset">
+						<h4>About Me</h4>
+						<p>
+							This is a static blog hosted by github.
+						</p>
+					</div>
+					<div class="sidebar-module">
+						<h4>Links</h4>
+						<ol class="list-unstyled">
+							<li><a href="http://github.com/">Github</a></li>
+							<li><a href="http://www.google.com/">Google</a></li>
+							<li><a href="http://www.baidu.com/">Baidu</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <header>
+			<h1>{{meta.site_name}}</h1>
+			<h2>{{meta.site_sub_name}}</h2>
+		</header> -->
+		<!-- <section class="sidebar">
+			<section class="tags">
+				<ul>
+					<li ng-repeat="(tag,count) in meta.tags">
+						<a ng-href="/tag/{{tag}}" style="font-size:{{8+count}}px;">{{tag}}</a>
+					</li>
+				</ul>
+			</section>
+			<section class="cates">
+				<ul>
+					<li ng-repeat="(cate,count) in meta.cates">
+						<a ng-href="cate/{{cate}}" style="font-size:{{8+count}}px;">{{cate}}</a>
+					</li>
+				</ul>
+			</section>
+		</section> -->
+		<footer>
+
+		</footer>
+		<!-- template start -->
+		<script type="text/ng-template" id="templates/home.html">
+			<div class="blog-post" ng-repeat="post in posts">
+				<h2 class="blog-post-title"><a href="/post/{{post.file}}">{{post.title?post.title:post.file}}</a></h2>
+				<p class="blog-post-meta">
+					<span>{{post.date?post.date:'Date not provided'}}</span>
+				</p>
+				<div class="blog-post-content">{{post.summary}}</div>
+			</div>
+		</script>
+		<script type="text/ng-template" id="templates/post.html">
+			<div class="blog-post">
+				<h2 class="blog-post-title">{{post.title?post.title:post.file}}</h2>
+				<p class="blog-post-meta">
+					<span>{{post.date?post.date:'Date not provided'}}</span>
+				</p>
+				<div class="blog-post-content" ng-bind-html="post.content|markdown"></div>
+			</div>
+		</script>
+		<script type="text/ng-template" id="templates/otherUrl.html">
+			<h2></h2>
+			<div>{{blogContent}}</div>
+		</script>
+		<script type="text/ng-template" id="templates/post-list.html">
+			<ul>
+				<li ng-repeat="post in posts">
+					<section class="post">
+						<hgroup>
+							<h3>
+								<a ng-href="/post/{{post.file}}">{{post.title}}</a>
+							</h3>
+							<h4>
+								<time>{{post.date}} - {{post.time}}</time>
+							</h4>
+						</hgroup>
+						<article ng-bind-html="post.summary|markdown"></article>
+						<div class"tags">
+							<ul>
+								<li ng-repeat="tag in post.tags">
+									<a href="tag/{{tag}}">#{{tag}}</a>
+								</li>
+							</ul>
+						</div>
+					</section>
+				</li>
+			</ul>
+		</script>
+		<script type="text/ng-template" id="templates/pages.html">
+			<div>Page list</div>
+		</script>
+		<script type="text/ng-template" id="templates/404.html">
+			<div>Page Not Found.</div>
+		</script>
+		<!-- template end -->
+		<script src="scripts/lib/showdown.js"></script>
+		<script src="scripts/lib/angular.js"></script>
+		<script src="scripts/lib/angular-route.js"></script>
+		<script src="scripts/lib/angular-sanitize.js"></script>
+		<script src="scripts/blog.js"></script>
+	</body>
+
+</html>

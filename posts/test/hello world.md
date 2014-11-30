@@ -1,3 +1,13 @@
+title: world
+date: 2014-08-22 17:20:45
+categories:
+- fuck
+tags:
+- function
+- for
+- in
+- loops
+---
 # world!
 
 # title   

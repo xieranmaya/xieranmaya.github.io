@@ -38,10 +38,10 @@ Every time when you commit, the pre-commit hook runs and generate the files your
 
 The pre-commit hook generated these files:
 
-* meta.json (contains the Blog name, how many pages your blog containers and other stuff, you can check it yourself)
+* meta.json (containing the Blog name, how many pages your blog containers and other stuff, you can check it yourself)
 ```
 {
-	"site_name":"My Blog",
+	"site_name":"Your Blog Name",
 	"site_sub_name":"A sentance to describe your blog",
 	"post_page":5,
 	"tags":{

@@ -25,8 +25,14 @@ var Blog = angular.module('Blog', ['ngRoute'])
 .config(function ($routeProvider, $locationProvider){
 	$routeProvider.
 		when('/', {// 主页，展示文章列表第一页
-			templateUrl: 'templates/post-list.html',
+			templateUrl: 'templates/home.html',
 			controller: 'PostList'
+		}).
+		when('/post/:file',{// 文章页面
+			templateUrl: 'templates/post.html',
+			controller: 'Post',
+			resolve:{
+			}
 		}).
 		when('/pages',{// 页面列表
 			templateUrl: 'templates/pages.html'
@@ -35,31 +41,38 @@ var Blog = angular.module('Blog', ['ngRoute'])
 			templateUrl: 'templates/page.html',
 			controller: 'Page'
 		}).
-		when('/:page',{// 文章列表翻页
-			templateUrl: 'templates/post-list.html',
-			controller: 'PostList'
-		}).
-		when('/post/:post',{// 文章页面
-			templateUrl: 'templates/post.html',
-			controller: 'Post'
-		}).
+		// when('/:page',{// 文章列表翻页
+		// 	templateUrl: 'templates/post-list.html',
+		// 	controller: 'PostList'
+		// }).
 		otherwise({
 			templateUrl: 'templates/404.html'
 		});
 
 	$locationProvider.html5Mode(true);
 })
-
+// .controller('Home', function ($scope, $http){
+// 	$http.get('generated/posts.json').success(function(posts){
+// 		$scope.posts = posts;
+// 	});
+// })
 .controller('PostList', function ($scope, $http, $routeParams) {
-	$http.get('/post-list.txt').success(function (data) {
-		(posts = data.split('\n')).pop();
+	$http.get('posts/test/g/all.json').success(function (posts) {
+		//(posts = data.split('\n')).pop();
 		$scope.posts = posts;
 	});
 })
 .controller('Post', function ($scope, $http, $routeParams){
-	$scope.post = {};
-	$scope.post.title = $routeParams.post;
-	$http.get('/posts/'+$routeParams.post).success(function (post){
-		$scope.post.content = post;
+	$http.get('/posts/test/g/' + $routeParams.file + '.json').success(function(post){
+		$scope.post = post;
+	}).then(function(){
+		$http.get('/posts/test/' + $routeParams.file).success(function (content){
+			$scope.post.content = content.replace(/[\s\S]*\-\-\-/igm, '');
+		});
+	})
+})
+.controller("Blog",function ($scope, $http, $rootScope){
+	$http.get("generated/meta.json").success(function (meta){
+		$scope.meta = meta;
 	});
-});
+})
