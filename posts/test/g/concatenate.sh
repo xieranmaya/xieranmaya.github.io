@@ -1,6 +1,6 @@
 echo concatenating...
 fileNum=$(ls *.md.json | wc -l)
-printf "[" > all.json
+echo "[" > all.json
 ls -tr *.md.json | while read fileName; do
 	fileContent=$(<$fileName)
 	fileNum=$(($fileNum - 1))

@@ -1,10 +1,11 @@
-rm g/*.md.json
+rm ./g/*.json
 ls -tr *.md | while read FileName; do
 	echo processing $FileName...
+	file=${FileName/".md"/""}
 	genFile="g/"$FileName".json"
 	lineNum=0
-	echo '{' > $genFile
-	printf "\t\"file\":\"$FileName\"\n" >> $genFile
+	echo "{" > $genFile
+	printf "\t\"file\":\"$file\"\n" >> $genFile
 	cat "$FileName" | while read line; do
 		lineNum=$(($lineNum+1))
 		if [[ $PropOver == true ]]; then # 属性读取结束，即---前的内容ok了
@@ -64,5 +65,5 @@ ls -tr *.md | while read FileName; do
 			done
 		fi
 	done
-	echo '}' >> $genFile
+	echo "}" >> $genFile
 done

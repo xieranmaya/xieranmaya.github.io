@@ -1,25 +1,25 @@
 var Blog = angular.module('Blog', ['ngRoute'])
 
 .directive('markdown', function () {
-    var converter = new Showdown.converter();
+    var converter = new Showdown.converter()
     return {
         restrict: 'EA',
         priority: 10,
         link: function (scope, element, attrs) {
-            var htmlText = converter.makeHtml(element.text());
-            console.log(htmlText);
-            element.html(htmlText);
+            var htmlText = converter.makeHtml(element.text())
+            console.log(htmlText)
+            element.html(htmlText)
         }
-    };
+    }
 })
 .filter('markdown',function ($sce){
-	var converter = new Showdown.converter();
+	var converter = new Showdown.converter()
 	return function (input){
 		if(input){
-			return $sce.trustAsHtml(converter.makeHtml(input));
+			return $sce.trustAsHtml(converter.makeHtml(input))
 		}
-		return;
-	};
+		return
+	}
 })
 
 .config(function ($routeProvider, $locationProvider){
@@ -47,32 +47,83 @@ var Blog = angular.module('Blog', ['ngRoute'])
 		// }).
 		otherwise({
 			templateUrl: 'templates/404.html'
-		});
+		})
 
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode(true)
 })
 // .controller('Home', function ($scope, $http){
 // 	$http.get('generated/posts.json').success(function(posts){
-// 		$scope.posts = posts;
-// 	});
+// 		$scope.posts = posts
+// 	})
 // })
-.controller('PostList', function ($scope, $http, $routeParams) {
-	$http.get('posts/test/g/all.json').success(function (posts) {
-		//(posts = data.split('\n')).pop();
-		$scope.posts = posts;
-	});
-})
-.controller('Post', function ($scope, $http, $routeParams){
-	$http.get('/posts/test/g/' + $routeParams.file + '.json').success(function(post){
-		$scope.post = post;
-	}).then(function(){
-		$http.get('/posts/test/' + $routeParams.file).success(function (content){
-			$scope.post.content = content.replace(/[\s\S]*\-\-\-/igm, '');
-		});
+.controller('PostList', function ($scope, BlogData, $routeParams) {
+	BlogData.postList().then(function (posts){
+		//(posts = data.split('\n')).pop()
+		$scope.posts = posts
 	})
 })
-.controller("Blog",function ($scope, $http, $rootScope){
-	$http.get("generated/meta.json").success(function (meta){
-		$scope.meta = meta;
-	});
+.controller('Post', function ($scope, BlogData, $routeParams){
+	BlogData.getPost($routeParams.file).then(function(post){
+		$scope.post = post
+	})
+	// $http.get('/posts/test/g/' + $routeParams.file + '.md.json').success(function(post){
+	// 	$scope.post = post
+	// }).then(function(){
+	// 	$http.get('/posts/test/' + $routeParams.file + '.md').success(function (content){
+	// 		$scope.post.content = content.replace(/[\s\S]*\-\-\-/igm, '')
+	// 	})
+	// })
+})
+.controller("Blog",function ($scope, BlogData, $rootScope){
+	BlogData.meta().success(function (meta){
+		$scope.meta = meta
+	})
+})
+.factory('BlogData', function ($http, $q){
+	blogData = {}
+	blogData.posts = {}
+	return {
+		meta:function(){
+			if(blogData.meta){
+				return blogData.meta
+			}
+			return $http.get('generated/meta.json')
+		},
+		postList:function(){
+			return $q(function(resolve){
+				if(blogData.postList){
+					resolve(blogData.postList)
+				}else{
+					$http.get('posts/test/g/all.json').success(function(postList){
+						blogData.postList = postList
+						resolve(postList)
+						postList.forEach(function(post){
+							blogData.posts[post.file] = post
+						})
+					})
+				}
+			})
+		},
+		getPost:function(file){
+			return $q(function(resolve){
+				if(!blogData.posts[file]){
+					$http.get('/posts/test/g/'+file+'.md.json').success(function(post){
+						blogData.posts[file] = post
+					}).then(function(){
+						$http.get('/posts/test/' + file + '.md').success(function (content){
+							blogData.posts[file].content = content.replace(/[\s\S]*\-\-\-/igm, '')
+							resolve(blogData.posts[file])
+						})
+					})
+				}else if(!blogData.posts[file].content){
+					$http.get('/posts/test/' + file + '.md').success(function (content){
+						blogData.posts[file].content = content.replace(/[\s\S]*\-\-\-/igm, '')
+						resolve(blogData.posts[file])
+					})
+				}else{
+					resolve(blogData.posts[file])
+				}
+			})
+		}
+	}
 })
