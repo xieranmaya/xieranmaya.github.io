@@ -1,3 +1,4 @@
+echo concatenating...
 fileNum=$(ls *.md.json | wc -l)
 printf "[" > all.json
 ls -tr *.md.json | while read fileName; do

@@ -1,4 +1,5 @@
 ls -tr *.md | while read FileName; do
+	echo processing $FileName...
 	genFile="g/"$FileName".json"
 	lineNum=0
 	echo '{' > $genFile
@@ -16,7 +17,7 @@ ls -tr *.md | while read FileName; do
 			break
 		fi
 		if [[ $lineNum == 1 && $line != "title: "* ]]; then # 第一行不以title开头,认为是没有元信息
-			echo =================$FileName:$line
+			#echo =================$FileName:$line
 			printf ",\t\"summary\":\"$line\\\\n" >> $genFile
 			read line
 			printf "$line\\\\n" >> $genFile
