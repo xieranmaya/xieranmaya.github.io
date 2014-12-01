@@ -1,3 +1,4 @@
+rm g/*.md.json
 ls -tr *.md | while read FileName; do
 	echo processing $FileName...
 	genFile="g/"$FileName".json"
