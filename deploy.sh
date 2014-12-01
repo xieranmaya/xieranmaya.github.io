@@ -10,6 +10,3 @@ concatenate.sh
 cd ..
 cd ..
 cd ..
-
-git add .
-git commit -m "add deploy scripts"
