@@ -167,3 +167,6 @@ h6, .h6 {
 [ng-cloak]{
   display: none;
 }
+.mr5{
+  margin-right: 5px;
+}
