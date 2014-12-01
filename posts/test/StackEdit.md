@@ -1,4 +1,4 @@
-Welcome to StackEdit!	{#welcome}
+Welcome to StackEdit! {#welcome}
 =====================
 
 

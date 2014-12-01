@@ -1,6 +1,6 @@
 {
 	"site_name":"Yet Another Static Blog",
-	"site_sub_name":"The blogs comment(A quick brown fox jumps over the lazy dog.)",
+	"site_sub_name":"The blogs description(A quick brown fox jumps over the lazy dog.)",
 	"post_page":3,
 	"page_size":10,
 	"tags":{

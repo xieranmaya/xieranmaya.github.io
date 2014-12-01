@@ -32,7 +32,16 @@
 				<div class="col-sm-8 blog-main" ng-view></div>
 				<div class="col-sm-3 col-sm-offset-1">
 					<div class="sidebar-module sidebar-module-inset">
-						<h4>About Me</h4>
+						<h4>About</h4>
+						<p>
+							This is a static blog hosted by github.
+						</p>
+						<p>
+							This is a static blog hosted by github.
+						</p>
+						<p>
+							This is a static blog hosted by github.
+						</p>
 						<p>
 							This is a static blog hosted by github.
 						</p>
@@ -48,44 +57,26 @@
 				</div>
 			</div>
 		</div>
-		<!-- <header>
-			<h1>{{meta.site_name}}</h1>
-			<h2>{{meta.site_sub_name}}</h2>
-		</header> -->
-		<!-- <section class="sidebar">
-			<section class="tags">
-				<ul>
-					<li ng-repeat="(tag,count) in meta.tags">
-						<a ng-href="/tag/{{tag}}" style="font-size:{{8+count}}px;">{{tag}}</a>
-					</li>
-				</ul>
-			</section>
-			<section class="cates">
-				<ul>
-					<li ng-repeat="(cate,count) in meta.cates">
-						<a ng-href="cate/{{cate}}" style="font-size:{{8+count}}px;">{{cate}}</a>
-					</li>
-				</ul>
-			</section>
-		</section> -->
-		<footer>
-
+		<footer class="blog-footer">
+			<p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+			<p><a href="#">Back to top</a></p>
 		</footer>
 		<!-- template start -->
 		<script type="text/ng-template" id="templates/home.html">
 			<div class="blog-post" ng-repeat="post in posts">
 				<h2 class="blog-post-title"><a href="/post/{{post.file}}">{{post.title?post.title:post.file}}</a></h2>
 				<p class="blog-post-meta">
-					<span>{{post.date?post.date:'Date not provided'}}</span>
+					<span>{{post.date?post.date:'writing date not provided'}}</span>
 				</p>
-				<div class="blog-post-content">{{post.summary}}</div>
+				<div class="blog-post-content" ng-bind-html="post.summary|markdown"></div>
+				<p class="text-right"><a href="/post/{{post.file}}">read more »</a></p>
 			</div>
 		</script>
 		<script type="text/ng-template" id="templates/post.html">
 			<div class="blog-post">
 				<h2 class="blog-post-title">{{post.title?post.title:post.file}}</h2>
 				<p class="blog-post-meta">
-					<span>{{post.date?post.date:'Date not provided'}}</span>
+					<span>{{post.date?post.date:'writing date not provided'}}</span>
 				</p>
 				<div class="blog-post-content" ng-bind-html="post.content|markdown"></div>
 			</div>

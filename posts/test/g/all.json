@@ -1,61 +1,95 @@
 [{
-	"file":"hello.md"
-},{
-	"file":"String.md"
-},{
-	"file":"Number.md"
-},{
-	"file":"Hash.md"
-},{
-	"file":"Function.md"
-},{
-	"file":"Event.md"
-},{
-	"file":"Array.md"
-},{
-	"file":"format.md"
-,	"title":"hello world"
-,	"date":"2014-08-22 11:56:33"
-,	"categories":"life"
-,	"tags":["js","linux","jquery"]
-},{
-	"file":"StackEdit.md"
-},{
-	"file":"test.md"
-,	"title":"this is a test"
-,	"date":"2014-08-22 11:56:33"
-,	"categories":"test"
-,	"tags":["test","js","linux","jquery"]
-},{
-	"file":"resume.md"
-,	"title":"谢然的简历"
-,	"date":"2014-08-22 17:31:03"
-,	"categories":"resume"
-,	"tags":["resume","person"]
-},{
-	"file":"hello world.md"
-,	"title":"world"
-,	"date":"2014-08-22 17:20:45"
-,	"categories":"fuck"
-,	"tags":["function","for","in","loops"]
-},{
-	"file":"ui-select.md"
-,	"title":"angular-ui"
-,	"date":"2014-11-30 20:29:00"
-},{
 	"file":"readme2.md"
 ,	"title":"OALD Se7en"
 ,	"date":"2014-08-22 11:56:33"
 ,	"categories":"test"
 ,	"tags":["test","js","linux"]
-},{
-	"file":"abc.md"
-,	"title":"test"
-},{
+,	"summary":"# OALD Se7en\n\nA Chrome App.\n"
+},
+{
 	"file":"ui-router.md"
-},{
+,	"summary":"\n# AngularUI Router &nbsp;[![Build Status](https://travis-ci.org/angular-ui/ui-router.svg?branch=master)](https://travis-ci.org/angular-ui/ui-router)\n\n#### The de-facto solution to flexible routing with nested views\n"
+},
+{
+	"file":"resume.md"
+,	"title":"谢然的简历"
+,	"date":"2014-08-22 17:31:03"
+,	"categories":"resume"
+,	"tags":["resume","person"]
+,	"summary":"## 基本特质\n* 高二开始自学 Basic 编程，文曲星上实现画图、游程编码压缩算法、劲舞团小游戏、绘制函数图像等小程序。自己设计出冒泡排序算法。\n* 高三时发现人教物理课本错误，整理成论文并发表于《中学生导报》，论文名称《液晶通电后变浑浊了吗》\n* 对技术充满热情和好奇心，一直没有间断关注和学习计算机相关知识。同时订阅了众多相关技术资料，专业方面知识面广。\n"
+},
+{
 	"file":"readme.md"
 ,	"title":"OALD Se7en"
 ,	"categories":"test"
 ,	"tags":["test","js","linux"]
-}]
+,	"summary":"# OALD Se7en\n\nA Chrome App.\n\n"
+},
+{
+	"file":"hello.md"
+,	"summary":"# Hello World\n\nhello world!\n\n"
+},
+{
+	"file":"hello world.md"
+,	"title":"world"
+,	"date":"2014-08-22 17:20:45"
+,	"categories":"fuck"
+,	"tags":["function","for","in","loops"]
+,	"summary":"# world!\n\n# title   \n\n"
+},
+{
+	"file":"format.md"
+,	"title":"hello world"
+,	"date":"2014-08-22 11:56:33"
+,	"categories":"life"
+,	"tags":["js","linux","jquery"]
+,	"summary":"# hello world\n\nThe quick brown fox jumps over the lazy dog.\n\n"
+},
+{
+	"file":"String.md"
+,	"summary":"Native: String {#String}\n========================\n\n字符串(String)的功能增强\n"
+},
+{
+	"file":"Number.md"
+,	"summary":"Native: Number {#Number}\n========================\n\n数字(Number)的功能增强\n"
+},
+{
+	"file":"Hash.md"
+,	"summary":"Native: Hash {#Hash}\n====================\n\n一个重新实现的Object({}), 被专门用于数据的存取. \n"
+},
+{
+	"file":"Function.md"
+,	"summary":"Native: Function {#Function}\n============================\n\n函数(Function)的功能增强\n"
+},
+{
+	"file":"test.md"
+,	"title":"this is a test"
+,	"date":"2014-08-22 11:56:33"
+,	"categories":"test"
+,	"tags":["test","js","linux","jquery"]
+,	"summary":"# hello world\nThe quick brown fox jumps over the lazy dog.\nThe quick brown fox jumps over the lazy dog.\nThe quick brown fox jumps over the lazy dog.\n"
+},
+{
+	"file":"StackEdit.md"
+,	"summary":"Welcome to StackEdit! {#welcome}\n=====================\n\n\n"
+},
+{
+	"file":"Event.md"
+,	"summary":"Native: Event {#Event}\n======================\n\nMooTools框架的事件对象包装类\n"
+},
+{
+	"file":"Array.md"
+,	"summary":"Native: Array {#Array}\n======================\n\n数组(Array)的功能增强\n"
+},
+{
+	"file":"ui-select.md"
+,	"title":"ui-select"
+,	"date":"2014-11-30 20:29:00"
+,	"summary":"# AngularJS ui-select [![Build Status](https://travis-ci.org/angular-ui/ui-select.svg?branch=master)](https://travis-ci.org/angular-ui/ui-select)\n\nAngularJS-native version of [Select2](http://ivaynberg.github.io/select2/) and [Selectize](http://brianreavis.github.io/selectize.js/).\n\n"
+},
+{
+	"file":"abc.md"
+,	"title":"test"
+,	"summary":"jm is calling me.\nwhat the fuck\nare you crazy?\n\n"
+}
+]
