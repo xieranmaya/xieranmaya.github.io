@@ -82,6 +82,8 @@
 				</p>
 				<div class="blog-post-content" ng-bind-html="post.content|markdown"></div>
 			</div>
+			<!-- <div id="disqus_thread" disqus></div> -->
+			<div duoshuo data-thread-key="{{post.file}}" data-title="{{post.title?post.title:post.file}}" data-url="/post/{{post.file}}"></div>
 		</script>
 		<script type="text/ng-template" id="templates/otherUrl.html">
 			<h2></h2>
@@ -118,11 +120,17 @@
 			<div>Page Not Found.</div>
 		</script>
 		<!-- template end -->
+
+		<script type="text/javascript">var duoshuoQuery = {short_name:"github404blog"};</script>
+		<script src="//static.duoshuo.com/embed.js"></script>
 		<script src="scripts/lib/showdown.js"></script>
 		<script src="scripts/lib/angular.js"></script>
 		<script src="scripts/lib/angular-route.js"></script>
 		<script src="scripts/lib/angular-sanitize.js"></script>
 		<script src="scripts/blog.js"></script>
+
+		<!--script src="//github404blog.disqus.com/embed.js"></script-->
+
 	</body>
 
 </html>

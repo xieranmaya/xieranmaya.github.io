@@ -6,7 +6,6 @@ ls -tr *.md.json | while read fileName; do
 	fileNum=$(($fileNum - 1))
 	if [[ $fileNum != 0 ]]; then
 		echo "$fileContent," >> all.json
-		#echo "," >> all.json
 	else
 		echo "$fileContent" >> all.json
 	fi

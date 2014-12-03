@@ -127,3 +127,26 @@ var Blog = angular.module('Blog', ['ngRoute'])
 		}
 	}
 })
+
+.directive('disqus',function(){
+	return {
+		restrict:'A',
+		link:function(scope, el, attrs){
+			DISQUS.reset({reload:true});
+		}
+	}
+})
+.directive('duoshuo',function(){
+	return {
+		restrict:'A',
+		link:function(scope, el, attrs){
+			scope.$watch(function(){
+				return el.attr('data-thread-key')
+			},function(newVal){
+				if(newVal){
+					DUOSHUO.EmbedThread(el[0]);
+				}
+			});
+		}
+	}
+})
