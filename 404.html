@@ -33,18 +33,11 @@
 				<div class="col-sm-3 col-sm-offset-1">
 					<div class="sidebar-module sidebar-module-inset">
 						<h4>About</h4>
-						<p>
-							This is a static blog hosted by github.
-						</p>
-						<p>
-							This is a static blog hosted by github.
-						</p>
-						<p>
-							This is a static blog hosted by github.
-						</p>
-						<p>
-							This is a static blog hosted by github.
-						</p>
+						<p>This is a static blog hosted by github.</p>
+						<p>This is a static blog hosted by github.</p>
+						<p>This is a static blog hosted by github.</p>
+						<p>This is a static blog hosted by github.</p>
+						<p>This is a static blog hosted by github.</p>
 					</div>
 					<div class="sidebar-module">
 						<h4>Links</h4>
@@ -57,10 +50,12 @@
 				</div>
 			</div>
 		</div>
+
 		<footer class="blog-footer">
 			<p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
 			<p><a href="#">Back to top</a></p>
 		</footer>
+
 		<!-- template start -->
 		<script type="text/ng-template" id="templates/home.html">
 			<div class="blog-post" ng-repeat="post in posts">
@@ -82,39 +77,7 @@
 				</p>
 				<div class="blog-post-content" ng-bind-html="post.content|markdown"></div>
 			</div>
-			<!-- <div id="disqus_thread" disqus></div> -->
 			<div duoshuo data-thread-key="{{post.file}}" data-title="{{post.title?post.title:post.file}}" data-url="/post/{{post.file}}"></div>
-		</script>
-		<script type="text/ng-template" id="templates/otherUrl.html">
-			<h2></h2>
-			<div>{{blogContent}}</div>
-		</script>
-		<script type="text/ng-template" id="templates/post-list.html">
-			<ul>
-				<li ng-repeat="post in posts">
-					<section class="post">
-						<hgroup>
-							<h3>
-								<a ng-href="/post/{{post.file}}">{{post.title}}</a>
-							</h3>
-							<h4>
-								<time>{{post.date}} - {{post.time}}</time>
-							</h4>
-						</hgroup>
-						<article ng-bind-html="post.summary|markdown"></article>
-						<div class"tags">
-							<ul>
-								<li ng-repeat="tag in post.tags">
-									<a href="tag/{{tag}}">#{{tag}}</a>
-								</li>
-							</ul>
-						</div>
-					</section>
-				</li>
-			</ul>
-		</script>
-		<script type="text/ng-template" id="templates/pages.html">
-			<div>Page list</div>
 		</script>
 		<script type="text/ng-template" id="templates/404.html">
 			<div>Page Not Found.</div>
@@ -129,8 +92,5 @@
 		<script src="scripts/lib/angular-sanitize.js"></script>
 		<script src="scripts/blog.js"></script>
 
-		<!--script src="//github404blog.disqus.com/embed.js"></script-->
-
 	</body>
-
 </html>
