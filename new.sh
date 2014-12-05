@@ -1,6 +1,13 @@
-echo $1
-fileName=$1.md
-echo "title: $1"|tr '-' ' ' > $fileName
+title=$1
+if [[ $1 == "" ]]; then
+	printf "Please input you post title: "
+	read title
+	title=$(echo $title | tr ' ' '-')
+	echo "title is: $title"
+fi
+fileName=$title.md
+echo "file name is: $fileName"
+echo "title: $title"|tr '-' ' ' > $fileName
 date=$(date "+%Y-%m-%d %H:%M:%S")
 echo "date: $date" >> $fileName
 echo "categories:" >> $fileName
