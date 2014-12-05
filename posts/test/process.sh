@@ -1,5 +1,5 @@
 rm ./g/*.json
-ls -tr *.md | while read FileName; do
+ls -t *.md | while read FileName; do
 	echo processing $FileName...
 	file=${FileName/".md"/""}
 	genFile="g/"$FileName".json"

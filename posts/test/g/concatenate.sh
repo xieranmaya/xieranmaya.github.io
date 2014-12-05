@@ -1,7 +1,9 @@
 echo concatenating...
 fileNum=$(ls *.md.json | wc -l)
 echo "[" > all.json
-ls -tr *.md.json | while read fileName; do
+ls -t ../*.md | while read fileName; do
+	fileName=$(echo $fileName | cut -c4-999)
+	fileName=$fileName.json
 	fileContent=$(<$fileName)
 	fileNum=$(($fileNum - 1))
 	if [[ $fileNum != 0 ]]; then
