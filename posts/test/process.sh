@@ -1,4 +1,5 @@
 rm ./g/*.json
+rm tag-*.txt
 ls -t *.md | while read FileName; do
 	echo processing $FileName...
 	file=${FileName/".md"/""}
@@ -50,6 +51,7 @@ ls -t *.md | while read FileName; do
 			printf ",\t\"tags\":[" >> $genFile
 			read line
 			tag=$(echo $line | cut -c3-9999)
+			echo $genFile >> tag-$tag.txt
 			printf "\"$tag\"" >> $genFile
 			while read line; do
 				if [[ $line == "---" ]]; then
@@ -61,9 +63,19 @@ ls -t *.md | while read FileName; do
 					printf "," >> $genFile
 				fi
 				tag=$(echo $line | cut -c3-9999)
+				echo $genFile >> tag-$tag.txt
 				printf "\"$tag\"" >> $genFile
 			done
 		fi
 	done
 	echo "}" >> $genFile
 done
+
+concatenate.sh
+
+ls tag-*.txt | while read filename; do
+	echo "generating $filename.json"
+	concat.sh $filename
+done
+
+rm tag-*.txt
