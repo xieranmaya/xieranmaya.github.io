@@ -58,7 +58,7 @@
 				<h2 class="blog-post-title"><a href="/post/{{post.file}}">{{post.title?post.title:post.file}}</a></h2>
 				<p class="blog-post-meta">
 					<span>{{post.date?post.date:'writing date not provided'}}</span>
-					<span class="label label-info mr5" ng-repeat="tag in post.tags">{{tag}}</span>
+					<a href="/tag/{{tag}}" ng-repeat="tag in post.tags"><span class="label label-info mr5">{{tag}}</span></a>
 				</p>
 				<div class="blog-post-content" ng-bind-html="post.summary|markdown"></div>
 				<p class="text-right"><a href="/post/{{post.file}}">read more »</a></p>
@@ -69,7 +69,7 @@
 				<h2 class="blog-post-title">{{post.title?post.title:post.file}}</h2>
 				<p class="blog-post-meta">
 					<span>{{post.date?post.date:'writing date not provided'}}</span>
-					<span class="label label-info mr5" ng-repeat="tag in post.tags">{{tag}}</span>
+					<a href="/tag/{{tag}}" ng-repeat="tag in post.tags"><span class="label label-info mr5">{{tag}}</span></a>
 				</p>
 				<div class="blog-post-content" ng-bind-html="post.content|markdown"></div>
 			</div>

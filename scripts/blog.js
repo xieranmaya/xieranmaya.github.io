@@ -7,9 +7,17 @@ var Blog = angular.module('Blog', ['ngRoute'])
 			templateUrl: 'templates/home.html',
 			controller: 'PostList'
 		}).
-		when('/post/:file',{// 文章页面
+		when('/post/:file',{// 文章页面,首页
 			templateUrl: 'templates/post.html',
 			controller: 'Post',
+		}).
+		when('/category/:category',{ // 分类
+			templateUrl: 'templates/post.html',
+			controller: 'CategoryList'
+		}).
+		when('/tag/:tag',{// 标签
+			templateUrl: 'templates/home.html',
+			controller: 'TagList'
 		}).
 		otherwise({
 			templateUrl: 'templates/404.html'
@@ -18,6 +26,16 @@ var Blog = angular.module('Blog', ['ngRoute'])
 
 .controller('PostList', function ($scope, BlogData) {
 	BlogData.postList().then(function (posts){
+		$scope.posts = posts
+	})
+})
+.controller('TagList', function($scope, BlogData, $routeParams){
+	BlogData.tagList($routeParams.tag).then(function(posts){
+		$scope.posts = posts
+	})
+})
+.controller('CategoryList', function($scope, BlogData, $routeParams){
+	BlogData.tagList($routeParams.category).then(function(posts){
 		$scope.posts = posts
 	})
 })
@@ -62,6 +80,20 @@ var Blog = angular.module('Blog', ['ngRoute'])
 						})
 					})
 				}
+			})
+		},
+		tagList:function(tag){
+			return $q(function(resolve){
+				$http.get('posts/test/tag/tag-' + tag + '.json').success(function(postList){
+					resolve(postList)
+				})
+			})
+		},
+		categoryList:function(category){
+			return $q(function(resolve){
+				$http.get('posts/test/category/category-' + category + '.json').success(function(postList){
+					resolve(postList)
+				})
 			})
 		},
 		getPost:function(file){

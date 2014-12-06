@@ -1,0 +1,17 @@
+[
+{
+	"file":"ui-router"
+,	"title":"AngularUI Router"
+,	"date":"2014-12-06 20:01:23"
+,	"categories":"doc"
+,	"tags":["doc","tag","ng"]
+,	"summary":"# AngularUI Router [![Build Status](https://travis-ci.org/angular-ui/ui-router.svg?branch=master)](https://travis-ci.org/angular-ui/ui-router)\n\n#### The de-facto solution to flexible routing with nested views\n\n"
+},
+{
+	"file":"ui-select"
+,	"title":"ui-select"
+,	"date":"2014-11-30 20:29:00"
+,	"tags":["doc","ng","tag"]
+,	"summary":"# AngularJS ui-select [![Build Status](https://travis-ci.org/angular-ui/ui-select.svg?branch=master)](https://travis-ci.org/angular-ui/ui-select)\n\nAngularJS-native version of [Select2](http://ivaynberg.github.io/select2/) and [Selectize](http://brianreavis.github.io/selectize.js/).\n\n"
+}
+]
