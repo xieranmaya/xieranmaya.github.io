@@ -5,7 +5,7 @@ if [[ $1 == "" ]]; then
 	title=$(echo $title | tr ' ' '-')
 	echo "title is: $title"
 fi
-fileName=$title.md
+fileName=posts/test/$title.md
 echo "file name is: $fileName"
 echo "title: $title"|tr '-' ' ' > $fileName
 date=$(date "+%Y-%m-%d %H:%M:%S")
