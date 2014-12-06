@@ -1,0 +1,8 @@
+{
+	"file":"bash-learn"
+,	"title":"bash 学习笔记"
+,	"date":"2014-12-06 10:32:50"
+,	"categories":"learn"
+,	"tags":["bash"]
+,	"summary":"bash 常用功能：\n```\n#数学运算\nx=$(($y+5))\n"
+}
