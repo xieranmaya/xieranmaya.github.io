@@ -1,5 +1,9 @@
 title: ui-select
 date: 2014-11-30 20:29:00
+tags:
+- doc
+- ng
+- tag
 ---
 # AngularJS ui-select [![Build Status](https://travis-ci.org/angular-ui/ui-select.svg?branch=master)](https://travis-ci.org/angular-ui/ui-select)
 

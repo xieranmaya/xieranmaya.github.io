@@ -1,8 +1,16 @@
-
-# AngularUI Router &nbsp;[![Build Status](https://travis-ci.org/angular-ui/ui-router.svg?branch=master)](https://travis-ci.org/angular-ui/ui-router)
+title: AngularUI Router
+date: 2014-12-06 20:01:23
+categories:
+- doc
+tags:
+- doc
+- tag
+- ng
+---
+# AngularUI Router [![Build Status](https://travis-ci.org/angular-ui/ui-router.svg?branch=master)](https://travis-ci.org/angular-ui/ui-router)
 
 #### The de-facto solution to flexible routing with nested views
----
+
 **[Download 0.2.13](http://angular-ui.github.io/ui-router/release/angular-ui-router.js)** (or **[Minified](http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js)**) **|**
 **[Guide](https://github.com/angular-ui/ui-router/wiki) |**
 **[API](http://angular-ui.github.io/ui-router/site) |**
@@ -14,7 +22,7 @@
 **[Help!](http://stackoverflow.com/questions/ask?tags=angularjs,angular-ui-router) |**
 **[Discuss](https://groups.google.com/forum/#!categories/angular-ui/router)**
 
----
+
 
 AngularUI Router is a routing framework for [AngularJS](/post/resume), which allows you to organize the
 parts of your interface into a [*state machine*](https://en.wikipedia.org/wiki/Finite-state_machine). Unlike the

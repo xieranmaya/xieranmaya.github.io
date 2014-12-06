@@ -1,3 +1,12 @@
+title: String Documents
+date: 2014-12-06 20:02:30
+categories:
+- doc
+tags:
+- doc
+- js
+- tag
+---
 Native: String {#String}
 ========================
 

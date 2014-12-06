@@ -1,5 +1,11 @@
 title: deploy test
 date: 2014-12-01 19:18:23
+categories:
+- test
+tags:
+- deploy
+- test
+- github
 ---
 写好之后直接git add
 然后git commit

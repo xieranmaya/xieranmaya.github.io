@@ -1,5 +1,8 @@
 {
 	"file":"abc"
-,	"title":"test"
+,	"title":"this is a test"
+,	"date":"2014-12-06 20:04:24"
+,	"categories":"test"
+,	"tags":["test","tag"]
 ,	"summary":"jm is calling me.\nwhat the fuck\nare you crazy?\n\n"
 }

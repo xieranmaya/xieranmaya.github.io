@@ -1,3 +1,12 @@
+title: Stack Edit
+date: 2014-12-06 20:07:06
+categories:
+- doc
+tags:
+- test
+- doc
+- tag
+---
 Welcome to StackEdit! {#welcome}
 =====================
 

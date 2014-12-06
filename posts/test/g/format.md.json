@@ -2,7 +2,7 @@
 	"file":"format"
 ,	"title":"hello world"
 ,	"date":"2014-08-22 11:56:33"
-,	"categories":"life"
-,	"tags":["js","linux","jquery"]
+,	"categories":"test"
+,	"tags":["js","linux","jquery","tag"]
 ,	"summary":"# hello world\n\nThe quick brown fox jumps over the lazy dog.\n\n"
 }

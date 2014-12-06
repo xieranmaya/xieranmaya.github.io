@@ -1,4 +1,8 @@
 {
 	"file":"String"
+,	"title":"String Documents"
+,	"date":"2014-12-06 20:02:30"
+,	"categories":"doc"
+,	"tags":["doc","js","tag"]
 ,	"summary":"Native: String {#String}\n========================\n\n字符串(String)的功能增强\n"
 }

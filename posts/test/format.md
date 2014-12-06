@@ -1,11 +1,12 @@
 title: hello world
 date: 2014-08-22 11:56:33
 categories:
-- life
+- test
 tags:
 - js
 - linux
 - jquery
+- tag
 ---
 # hello world
 

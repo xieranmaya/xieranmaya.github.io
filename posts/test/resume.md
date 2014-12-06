@@ -4,7 +4,7 @@ categories:
 - resume
 tags:
 - resume
-- person
+- about
 ---
 ## 基本特质
 * 高二开始自学 Basic 编程，文曲星上实现画图、游程编码压缩算法、劲舞团小游戏、绘制函数图像等小程序。自己设计出冒泡排序算法。
