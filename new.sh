@@ -1,3 +1,4 @@
+editor=$(<editor.txt)
 title=$1
 if [[ $1 == "" ]]; then
 	printf "Please input you post title: "
@@ -19,3 +20,5 @@ echo "---" >> $fileName
 printf "A quick brown fox jumps over the lazy dog.\n\n" >> $fileName
 printf "A quick brown fox jumps over the lazy dog.\n\n" >> $fileName
 printf "A quick brown fox jumps over the lazy dog.\n" >> $fileName
+
+"$editor" $fileName

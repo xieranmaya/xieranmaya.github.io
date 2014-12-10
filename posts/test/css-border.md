@@ -1,0 +1,9 @@
+title: css border
+date: 2014-12-10 11:51:11
+categories:
+- css
+tags:
+- css
+- cold
+---
+今天突然发现border如果不设置color的话,它是会继承该元素文字的颜色的,这也是为毛border的颜色默认为黑色的原因

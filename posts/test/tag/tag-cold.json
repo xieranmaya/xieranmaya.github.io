@@ -6,13 +6,5 @@
 ,	"categories":"css"
 ,	"tags":["css","cold"]
 ,	"summary":"今天突然发现border如果不设置color的话,它是会继承该元素文字的颜色的,这也是为毛border的颜色默认为黑色的原因\n\n\n\n"
-},
-{
-	"file":"css-learn"
-,	"title":"css learn"
-,	"date":"2014-12-05 19:58:13"
-,	"categories":"css"
-,	"tags":["css","browser","bootstrap"]
-,	"summary":"发现一些按钮的盒模型被user agent style置为border-box\n\n比如\n```\n"
 }
 ]
