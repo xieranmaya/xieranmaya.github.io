@@ -10,10 +10,12 @@
 	</head>
 
 	<body ng-controllers="Blog">
+
 		<div class="blog-masthead">
 			<div class="container">
 			<nav class="blog-nav">
 				<a class="blog-nav-item active" href="/">Home</a>
+				<a class="blog-nav-item" href="a.html" target="_top">Page</a>
 			</nav>
 			</div>
 		</div>
@@ -30,10 +32,11 @@
 					<div class="sidebar-module sidebar-module-inset">
 						<h4>About</h4>
 						<p>This is a static blog hosted by github.</p>
+						<p>A quick brown fox jumps over the lazy dog.</p>
 						<p>This is a static blog hosted by github.</p>
+						<p>A quick brown fox jumps over the lazy dog.</p>
 						<p>This is a static blog hosted by github.</p>
-						<p>This is a static blog hosted by github.</p>
-						<p>This is a static blog hosted by github.</p>
+						<p>A quick brown fox jumps over the lazy dog.</p>
 					</div>
 					<div class="sidebar-module">
 						<h4>Links</h4>
@@ -80,18 +83,12 @@
 		</script>
 		<!-- template end -->
 
-		<script type="text/javascript">var duoshuoQuery = {short_name:"github404blog"};</script>
-		<script src="//static.duoshuo.com/embed.js"></script>
+		<script>duoshuoQuery={short_name:"github404blog"}</script>
+		<script src="scripts/lib/angular.min.js"></script>
+		<script src="scripts/lib/angular-route.min.js"></script>
 		<script src="scripts/lib/showdown.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script>
-		<script>
-		if(!document.angular){
-			document.write('<script src="scripts/lib/angular.js"></script>')
-		}
-		</script>
-		<script src="scripts/lib/angular-route.js"></script>
-		<script src="scripts/lib/angular-sanitize.js"></script>
+		<script src="scripts/lib/angular-sanitize.min.js"></script>
+		<script src="//static.duoshuo.com/embed.js"></script>
 		<script src="scripts/blog.js"></script>
-
 	</body>
 </html>
