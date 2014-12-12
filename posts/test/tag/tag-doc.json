@@ -1,13 +1,5 @@
 [
 {
-	"file":"ui-router"
-,	"title":"AngularUI Router"
-,	"date":"2014-12-06 20:01:23"
-,	"categories":"doc"
-,	"tags":["doc","tag","ng"]
-,	"summary":"# AngularUI Router [![Build Status](https://travis-ci.org/angular-ui/ui-router.svg?branch=master)](https://travis-ci.org/angular-ui/ui-router)\n\n#### The de-facto solution to flexible routing with nested views\n\n"
-},
-{
 	"file":"StackEdit"
 ,	"title":"Stack Edit"
 ,	"date":"2014-12-06 20:07:06"
@@ -22,6 +14,14 @@
 ,	"categories":"doc"
 ,	"tags":["doc","js","tag"]
 ,	"summary":"Native: String {#String}\n========================\n\n字符串(String)的功能增强\n"
+},
+{
+	"file":"ui-router"
+,	"title":"AngularUI Router"
+,	"date":"2014-12-06 20:01:23"
+,	"categories":"doc"
+,	"tags":["doc","tag","ng"]
+,	"summary":"# AngularUI Router [![Build Status](https://travis-ci.org/angular-ui/ui-router.svg?branch=master)](https://travis-ci.org/angular-ui/ui-router)\n\n#### The de-facto solution to flexible routing with nested views\n\n"
 },
 {
 	"file":"ui-select"
