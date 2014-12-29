@@ -1,13 +1,5 @@
 [
 {
-	"file":"这是一篇文章"
-,	"title":"这是一篇文章"
-,	"date":"2014-12-29 21:06:43"
-,	"categories":"文章"
-,	"tags":["test","文章"]
-,	"summary":"文章是个小贱人\n\nA quick brown fox jumps over the lazy dog.\n\n"
-},
-{
 	"file":"hello"
 ,	"title":"Hello Wrold"
 ,	"date":"2014-12-06 20:06:09"
