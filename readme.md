@@ -1,4 +1,4 @@
-# xieranmaya.github.com
+# xieranmaya.github.io
 
 ## Yet another dead simple static blog system.
 
