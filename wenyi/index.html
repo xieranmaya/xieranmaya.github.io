@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
 <meta name="robots" content="noindex">
-  <title>JS Bin</title>
+  <title>文艺部招新</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="index_files/swiper.css">
+  <link rel="stylesheet" href="animate.min.css">
   <script src="index_files/swiper.min.js"></script>
 
 <style id="jsbin-css">
@@ -79,9 +80,24 @@ body {
 img{
   max-width: 100%;
 }
+
+.rotate0{-webkit-transform: rotate(-5deg);}
+.rotate1{-webkit-transform: rotate(-4deg);}
+.rotate2{-webkit-transform: rotate(-3deg);}
+.rotate3{-webkit-transform: rotate(-2deg);}
+.rotate4{-webkit-transform: rotate(-1deg);}
+.rotate5{-webkit-transform: rotate(1deg);}
+.rotate6{-webkit-transform: rotate(2deg);}
+.rotate7{-webkit-transform: rotate(3deg);}
+.rotate8{-webkit-transform: rotate(4deg);}
+.rotate9{-webkit-transform: rotate(5deg);}
+
 p{
   margin: .3em 0;
   text-shadow: 0px 0px 2px red;
+}
+p:last-child{
+  margin-bottom: 30px;
 }
 .slide-1{
   background-image: url(img/239044F913794A33129DFD5350111CCA.png);
@@ -94,9 +110,9 @@ p{
 }
 .slide-3{
   background-image: url(img/hezhao.png);
-  -webkit-background-size: contain;
-  background-size: contain;
-  box-shadow: none;
+  /*-webkit-background-size: contain;*/
+  /*background-size: contain;*/
+  /*box-shadow: none;*/
   /*background-position: top;*/
 }
 .slide-4{
@@ -158,6 +174,8 @@ p{
         <!-- <img src="img/hezhao.png" alt=""> -->
       </div>
       <div class="swiper-slide slide-3">
+        <img src="img/hezhao.png" alt="">
+        <img src="img/629ab43fef1b911d4d5caec5a7b9cc6b.jpg" alt="">
       </div>
       <div class="swiper-slide slide-4">
         <p>没有繁重的桌子让你大展身手</p>
@@ -246,6 +264,25 @@ var swiper = new Swiper('.swiper-container', {
     console.log(sw)
   }
 });
+var anim = [
+'bounce',
+'flash',
+'pulse',
+'rubberBand',
+'shake',
+// 'swing',
+'tada',
+'wobble',
+'jello',
+];
+
+[].slice.call(document.querySelectorAll('img')).forEach(function(img){
+  img.classList.add('rotate'+parseInt(Math.random()*10));
+
+  img.classList.add('animated','infinite');
+
+  img.classList.add(anim[parseInt(Math.random()*anim.length)])
+})
 </script>
 
 </body>
