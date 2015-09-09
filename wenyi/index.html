@@ -4,7 +4,7 @@
   <meta charset="utf-8">
 <meta name="robots" content="noindex">
   <title>JS Bin</title>
-  <meta name="viewport" content="width=device-width;">
+  <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="index_files/swiper.css">
   <script src="index_files/swiper.min.js"></script>
 
@@ -12,6 +12,12 @@
 html, body {
   position: relative;
   height: 100%;
+}
+*{
+  box-sizing: border-box;
+}
+img{
+  box-sizing: content-box;
 }
 body {
   background: #eee;
@@ -29,6 +35,7 @@ body {
   text-align: center;
   font-size: 18px;
   background: #fff;
+  padding: 20px 10px;
   /* Center slide text vertically */
   /*display: -webkit-box;
   display: -ms-flexbox;
@@ -44,20 +51,6 @@ body {
   align-items: center;*/
 }
 
-.cicada-stripes{
-  background-color: #026873;
-  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
-  linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
-  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
-  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
-  background-size: 13px, 29px, 37px, 53px;
-}
-.tablecloth{
-  background-color:white;
-  background-image: linear-gradient(90deg, rgba(200,0,0,.5) 50%, transparent 50%),
-  linear-gradient(rgba(200,0,0,.5) 50%, transparent 50%);
-  background-size:50px 50px;
-}
 
 .slide-1,
 .slide-2,
@@ -87,6 +80,7 @@ img{
 }
 p{
   margin: .3em 0;
+  text-shadow: 0px 0px 2px red;
 }
 .slide-1{
   background-image: url(img/239044F913794A33129DFD5350111CCA.png);
@@ -123,9 +117,30 @@ p{
   background-image: url(img/5A8CD28AE97A7FF73DC3A7FA1C7D9E8B.png);
   box-shadow: none;
 }
+.slide-12{
+  background-image: url(img/d85bc483d59a3787c8e34bfb52065471.jpg);
+  font-size: 20px;
+}
+.swiper-slide p,
+.swiper-slide img{
+  position: relative;
+  top: 10px;
+  opacity: 0;
+  -webkit-transition: all 1s ease-in-out;
+  -webkit-transition-property: top,opacity;
+}
+.swiper-slide.swiper-slide-active p,
+.swiper-slide.swiper-slide-active img{
+  top: 0;
+  opacity: 1;
+}
 </style>
 </head>
 <body>
+<audio id="bgMusic" src="media/7719671139399977.mp3" style="display:none;" autoplay></audio>
+<script>
+  bgMusic.volume=0.2
+</script>
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide slide-1">
@@ -155,7 +170,7 @@ p{
       </div>
       <div class="swiper-slide slide-5">
 
-        <p>你喜欢泡温泉吃吃吃打麻将的惬意生活</p>
+        <p>你喜欢玩玩乐乐的惬意生活</p>
         <p>你喜欢指点江山调度舞台的豪气万千</p>
         <p>你喜欢在璀璨夺目的灯光下跳跃翻转</p>
         <p>你喜欢的都是你喜欢的</p>
@@ -163,9 +178,6 @@ p{
         <p>就是要来文艺部好好工作好好玩</p>
 
         <img src="img/_storage_emulated_0_tencent_MicroMsg_5675f68ae8afc4556f5a94c10169cacf_image2_c6_3f_c63f91ea5b8f1bd664ff1ad51c684f7f_recompress.jpg" alt="">
-
-
-
 
       </div>
       <div class="swiper-slide slide-6">
@@ -175,8 +187,6 @@ p{
         <p>这片舞台是我们的创作，每场晚会是我们的心血。</p>
 
         <img src="img/_storage_emulated_0_tencent_MicroMsg_5675f68ae8afc4556f5a94c10169cacf_image2_c8_6f_c86f477698f55fd189341bb53d19d17c_recompress.jpg" alt="">
-
-
 
       </div>
       <div class="swiper-slide slide-7">
@@ -199,7 +209,7 @@ p{
       <div class="swiper-slide slide-10"> 
         <img src="img/EFC7FFB832BE28DA1702D67BAEFF3A1C.png" alt="">
         <p>我叫文艺部，如你所料，我肯定是一个安静文艺内向的人。</p>
-        <p>所以我肯定不会在工作之余打几圈麻将，泡几次温泉，吃几顿海鲜大餐的。</p>
+        <p>所以我肯定不会做打牌啊胡吃海喝的这样无聊俗气的事情</p>
         <p>什么？你说你看见过我？</p>
         <p>天呐！那肯定又是我的下属--由一个美女子带领的一帮年轻人将我的招牌拿出去招摇撞骗！</p>
         <p>虽然我知道我很有名，但请低调一点低调一点再低调一点…不能因为我长得可爱又有内涵你们就欺负我+_+</p>
@@ -207,9 +217,15 @@ p{
         <p>毕竟，我要留一个神秘的背影给你们…</p>
         <p>--依旧来自一个幕后的工作者</p>
       </div>
-      <div class="swiper-slide slide-11"> 
+      <div class="swiper-slide slide-11">
+        <img src="img/1485f8cb363ff46ae7104417249e2008.jpg" alt="">
+        <img src="img/629ab43fef1b911d4d5caec5a7b9cc6b.jpg" alt="">
       </div>
-      <div class="swiper-slide slide-12"> 
+      <div class="swiper-slide slide-12">
+        <p>我们是文艺部：</p>
+        <p>我们承办多个学院晚会与文艺比赛，我们与学院话剧社金话筒工作室密切合作。在学院迎新晚会、运动会特色方阵、拉拉队、心理话剧比赛、合唱比赛都有我们的身影。从制定策划的细致到临场指挥的英姿，文艺部都能让你完美呈现。在这里，你将收获志同道合的伙伴和极具色彩的非凡大学历程。</p>
+        <p>我们在等待这样的你：工作认真负责，阳光开朗，具有一定艺术特长，形象气质清新独特。</p>
+        <p>欢迎带上最棒的自己参与我们的面试，歌声，舞蹈，音乐，不限形式，等待着你用你的才艺惊艳我们的感官。等待你的加入。</p>
       </div>
       <div class="swiper-slide slide-13"> 
       </div>
