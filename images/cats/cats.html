@@ -16,6 +16,7 @@
     .fav-list::after{
       content: '';
       flex-grow: 999999999;
+      order: 999999999;
     }
     .fav-list > div{
       margin: 2px;
@@ -42,7 +43,7 @@
   <div class="fav-list">
     <div
       ng-repeat="img in imgs"
-      style="flex-grow:{{img.width*100/img.height}};flex-basis:{{img.width*300/img.height}}px;">
+      style="order:{{::rand()}};flex-grow:{{img.width*100/img.height}};flex-basis:{{img.width*300/img.height}}px;">
       <i style="padding-bottom:{{img.height/img.width*100}}%"></i>
       <img ng-src="{{img.url}}"/>
     </div>
@@ -53,8 +54,11 @@
 angular.module('app', [])
 
 .controller('Ctrl', function($scope, $http) {
-  $http.get('cats.json').success(function(imgs){
+  $http.get('cats.json').success(function(imgs) {
     $scope.imgs = imgs
+    $scope.rand = function() {
+      return Math.floor(Math.random() * 30)
+    }
   })
 })
 </script>
