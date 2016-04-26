@@ -43,7 +43,7 @@
   <div class="fav-list">
     <div
       ng-repeat="img in imgs"
-      style="order:{{::rand()}};flex-grow:{{img.width*100/img.height}};flex-basis:{{img.width*240/img.height}}px;">
+      style="flex-grow:{{img.width*100/img.height}};flex-basis:{{img.width*240/img.height}}px;">
       <i style="padding-bottom:{{img.height/img.width*100}}%"></i>
       <img ng-src="{{img.url}}"/>
     </div>
@@ -55,10 +55,9 @@ angular.module('app', [])
 
 .controller('Ctrl', function($scope, $http) {
   $http.get('cats.json').success(function(imgs) {
-    $scope.imgs = imgs
-    $scope.rand = function() {
-      return Math.floor(Math.random() * 30)
-    }
+    $scope.imgs = imgs.sort(function() {
+      return 0.5 - Math.random()
+    })
   })
 })
 </script>
