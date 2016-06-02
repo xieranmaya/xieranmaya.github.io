@@ -2,6 +2,7 @@
 <html lang="en" ng-app="app">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
   <title>Cats</title>
   <style>
     body{
@@ -13,11 +14,11 @@
       flex-wrap: wrap;
       margin: 2px;
     }
-    .fav-list::after{
+    /* .fav-list::after{
       content: '';
       flex-grow: 999999999;
       order: 999999999;
-    }
+    } */
     .fav-list > div{
       margin: 2px;
       background-color: violet;
@@ -36,6 +37,12 @@
       height: 100%;
       object-fit: cover;
     }
+    .fav-list > .placeholder{
+      flex-grow: 100;
+      flex-basis: 240px;
+      height: 0;
+      margin: 0;
+    }
   </style>
 </head>
 <body ng-controller="Ctrl">
@@ -47,6 +54,7 @@
       <i style="padding-bottom:{{img.height/img.width*100}}%"></i>
       <img ng-src="{{img.url}}"/>
     </div>
+    <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]" class="placeholder"></div>
   </div>
 
 <script src="angular.min.js"></script>
