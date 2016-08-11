@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="lodash.min.js"></script>
+<script src="jquery-2.1.4.min.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style>
+  body{
+    margin: 0;
+  }
+  .photo-grid{
+    /*border: 1px solid lightgreen;*/
+    margin: 20px 10px 0;
+    overflow: hidden;
+    /*width: 1500px;*/
+    /*background-color: black;*/
+  }
+
+  .photo{
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    margin: 0 10px 20px 10px;
+    float: left;
+    transition: 10s linear;
+  }
+  </style>
+</head>
+<body>
+  <button onclick="layout()">Layout</button>
+  <div class="photo-grid">
+    
+  </div>
+</body>
+<script src="image-url-list.js"></script>
+<script src="all-eattings/My Favourite Photos_files/imgs.js"></script>
+<script>
+$photoGrid = $('.photo-grid')
+
+function fixHeight(){
+  $photoGrid.empty()
+  imgUrlList.sort(function(){
+    return 0
+    return 0.5 - Math.random()
+  }).forEach(function(url) {
+    getImageSize(url).then(function(size) {
+      var initialHeight = 200
+      var ratio = size.height / initialHeight
+      var width = size.width / ratio
+      $photoGrid.append('<div class="photo" style="width:' + width + 'px;height:' + initialHeight + 'px;background-image:url(\'' + url + '\')"></div>')
+    })
+  })
+}
+
+
+function getImageSize(url) {
+  return new Promise(function(resolve) {
+    var image = new Image()
+    image.src = url
+    image.onload = function() {
+      resolve({
+        width: image.width,
+        height: image.height
+      })
+    }
+  })
+}
+
+function layout(){
+  var renderWidth = $photoGrid.width() - 1;
+  _.chain(  $('.photo')  ).groupBy(function(el){
+    return $(el).position().top
+  }).each(function(list,key){
+    var totalRealWidth = _.sum(list,function(el){
+      return $(el).width()
+    })
+    var availWidth = renderWidth-list.length*20
+    console.log('total width and availWidth:', totalRealWidth, availWidth)
+    // console.log(key, list)
+    // return
+    var ratio = availWidth/totalRealWidth
+    console.log(ratio)
+    var sizes = list.map(function(el, index){
+      return [
+        $(el).width(),
+        $(el).height()
+      ]
+    })
+
+    console.log(sizes)
+
+    list.forEach(function(el, index){
+      el.style.width = Math.floor(ratio * sizes[index][0]) + 'px'
+      el.style.height = Math.floor(ratio * sizes[index][1]) + 'px'
+      // console.log(el.style.width, el.style.height)
+      // console.log(ratio * sizes[index][0], ratio * sizes[index][1])
+    })
+
+    var initialSum = _.initial(list).reduce(function(initialSum,el,index){
+      return initialSum + Math.floor(ratio * sizes[index][0])
+    },0)
+
+    var last = list[list.length-1]
+
+    last.style.width = availWidth - initialSum + 'px'
+    // last.style.height = Math.floor(ratio * $(last).height()) + 'px'
+    // console.log(totalRealWidth)
+  }).value()
+}
+
+fixHeight()
+
+// function doit(){
+//   fixHeight()
+//   setTimeout(layout)
+// }
+
+// window.onload = layout
+
+// window.onresize = _.debounce(layout,500)
+
+</script>
+</html>
