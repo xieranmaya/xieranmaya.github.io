@@ -30,7 +30,7 @@
 
 关于我的技术能力，下面列一些事实：
 
-* 实现了 Promise/A+ 标准，[其中 Promise3 那条就是我的实现](https://promisesaplus.com/implementations)
+* 实现了 Promise/A+ 标准，[Promise/A+ 官方网站的实现列表](https://promisesaplus.com/implementations)，其中 Promise3 那条就是我的实现（仔细找，有点多）
 * 多篇博客文章被 75 周刊推荐，链接：[145 期第 2 篇](http://old.75team.com/weekly/issue145.html)，[156 期第 1 篇](http://old.75team.com/weekly/issue156.html)，[169 期第 2 篇](http://old.75team.com/weekly/issue169.html)，均链接到我的 Github
 * 其中有一篇我翻译成英文也上了CSS Weekly，[CSS Weekly issue 228](http://css-weekly.com/issue-228/)，Articles & Tutorials 下面的第一篇就是我的，这一篇就给我的博客带来了至少 150+ 的 Star
 * 前端相关的书籍基本都读过（虽然我觉得列书单没太大意义）
