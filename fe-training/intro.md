@@ -134,4 +134,6 @@
 
 ## 扣扣/微信：285696737
 
+![qr of my qq](https://xieranmaya.github.io/fe-training/qr-qq.jpg)
+
 如果可以的话建议加 QQ 而不是微信，我需要使用 QQ 的消息同步功能，因为经常忘记跟谁聊了什么。
