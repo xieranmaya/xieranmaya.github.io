@@ -10,6 +10,6 @@
       
 这几年的工作也让我在这个方向上有了不少进步，目前想法已经成熟，我将于 9 月 26 日在杭州下沙开办前端培训班，如果你或者你的朋友正在学习或想要学习前端开发，希望你能将他介绍到我这里来。我会非常感谢！**同时如果你不满于现在的工作，有勇气转行到互联网行业，我也十分欢迎你来参加我的培训班！当然，你也需要满足一定的条件 : )，只要你能满足我的条件，未来的薪资方面我也可以给你一定的保证。**
       
-如果你有兴趣，可以[点击这里](https://xieranmaya.github.io/fe-training/?from=oald)了解更多关于我培训班的问题。里面对我的技术能力，教学内容，收费方式等都做了说明。
+如果你有兴趣，可以[点击这里](https://xieranmaya.github.io/fe-training/?from=oald)了解更多关于我培训班的问题。里面对我的技术能力，教学内容，收费方式等都做了说明。也可以在Donate页面直接和我取得联系。
       
-最后，非常抱歉在 App 里展示广告，如果你不喜欢，关闭就好了，它不会再次出现(可在Tools重新查看)~另外，如果喜欢这款App，希望你能分享给你的朋友，或者去[应用商店](https://chrome.google.com/webstore/detail/oald-7-%E7%89%9B%E6%B4%A5%E9%AB%98%E9%98%B6%E7%AC%AC%E4%B8%83%E7%89%88/adodeopedjkoofdbblibackjdklbnepe?hl=zh-CN&gl=CN&authuser=1)给个五星好评~最好能够写上喜欢她的理由~
+最后，非常抱歉在 App 里展示广告，如果你不喜欢，关闭就好了，它不会再次出现(可在Tools中重新查看)~另外，如果喜欢这款App，希望你能分享给你的朋友，或者去[应用商店](https://chrome.google.com/webstore/detail/oald-7-%E7%89%9B%E6%B4%A5%E9%AB%98%E9%98%B6%E7%AC%AC%E4%B8%83%E7%89%88/adodeopedjkoofdbblibackjdklbnepe?hl=zh-CN&gl=CN&authuser=1)给个五星好评~最好能够写上喜欢她的理由~
