@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading...</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="styles/markdown.css">
+  <style>
+    body {
+      font-family: -apple-system,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+    }
+    img {
+      max-width: 100%;
+    }
+    #markdown {
+      max-width: 800px;
+      min-width: 200px;
+      margin: 30px auto;
+      padding: 30px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="markdown" class="markdown-body">Loading...</div>
+</body>
+<script src="libs/marked.js"></script>
+<script src="libs/jquery-2.1.4.min.js"></script>
+<script>
+$(function(){
+  $.get('https://xieranmaya.github.io/fe-training/intro.md').then(function(mdText) {
+    mdHtml = marked(mdText)
+    $('#markdown').html(mdHtml)
+    $('title').text($('#markdown h1').text())
+  })
+})
+</script>
+</html>
