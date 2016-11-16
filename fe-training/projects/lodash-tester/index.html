@@ -219,10 +219,14 @@
   <table border=1 class="result-table">
     <tbody id="result-body">
       <tr>
-        <th>函数</th>
+        <th><a target="_blank" href="https://lodash.com/docs/">函数</a></th>
         <script>
           implementations.map(it => {
-            document.write(`<th title="${getImplementerNameFromUrl(it.url)}">${getImplementerNameFromUrl(it.url)}</th>`)
+            document.write(`
+              <th title="${getImplementerNameFromUrl(it.url)}">
+              <a target="_blank" href="${it.url}">${getImplementerNameFromUrl(it.url)}</a>
+              </th>
+            `)
           })
         </script>
       </tr>
