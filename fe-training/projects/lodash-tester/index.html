@@ -14,14 +14,11 @@
   </script>
   <script>
     var implementations = [{
-      url: 'implementations/xieran-lodash.js',
-      implementer: 'abc',
+      // url: 'implementations/xieran-lodash.js',
     }, {
-      // url: 'implementations/xr-lodash.js',
-      implementer: 'def',
+      url: 'https://jeane-zz.github.io/ZhangDZ-lodash.js',
     }, {
       url: 'https://grassrootscoder.github.io/TianXiaoBo-lodash.js',
-      implementer: 'txb',
     }, {
       url: 'implementations/ShiFangHong-lodash.js',
     }, {
@@ -84,23 +81,62 @@
     }
   </script>
   <style>
+    h1 {
+      text-align: center;
+    }
+    .result-table {
+      width: 100%;
+      overflow: hidden;
+      border-collapse: collapse;
+    }
     .not-implemented {
-      background-color: grey;
+      background-color: #aaa;
     }
     .pass {
-      background-color: green;
+      background-color: #2ECC40;
     }
     .not-pass {
       background-color: yellow;
     }
     .error {
-      background-color: red;
+      background-color: #FF4136;
+    }
+    .result-table tr:hover td{
+      background-color: transparent;
+    }
+    /*tr:hover {
+      background-color: #39cccc;
+    }*/
+    td {
+      position: relative;
+    }
+    td:hover::before,
+    td:hover::after {
+      content: '';
+      width: 100%;
+      height: 999999px;
+      position: absolute;
+      left: 0;
+      top: -9999px;
+      background-color: rgba(57, 204, 204, 0.5);
+      pointer-events: none;
+      z-index: 5;
+    }
+    td:hover::before {
+      height: 100%;
+      width: 99999px;
+      top: 0;
+      left: -9999px;
+    }
+    th {
+      /*background-color: black;*/
+      /*color: white;*/
     }
   </style>
 </head>
 <body>
   <h1>大喵牌前端培训Lodash实践项目实时结果</h1>
-  <table border=1>
+  <table border=1 class="result-table">
     <tbody id="result-body">
       <tr>
         <th>函数</th>
