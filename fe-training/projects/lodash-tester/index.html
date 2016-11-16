@@ -225,7 +225,7 @@
   </script>
 </head>
 <body>
-  <h1>大喵教育前端培训 Lodash 实践项目实时结果</h1>
+  <h1>大喵教育前端培训 Lodash 实践项目实时状态</h1>
   <table border=1 class="result-table">
     <tbody id="result-body">
       <tr>
@@ -265,7 +265,7 @@ $(function() {
         var customFunctions//所有人自己实现的函数
         if (testCases.hasOwnProperty(methodName)) { //有测试数据才测
           // debugger
-          testCase = testCases[methodName][0]//先只测一个数据
+          testCase = _.cloneDeep(testCases[methodName][0])//先只测一个数据
           lodashReturnValue = fn.apply(_, testCase)
           customFunctions = customLodashNames.map(customLodash=>window[customLodash][methodName])
           testResult = customFunctions
@@ -274,7 +274,7 @@ $(function() {
                 return `<td class="unimplemented">未实现</td>`
               } else {
                 try {
-                  customReturnValue = customMethod.apply(null, testCase)
+                  customReturnValue = customMethod.apply(null, _.cloneDeep(testCase))
                   if (_.isEqual(lodashReturnValue, customReturnValue)) {
                     return `<td class="pass">通过</td>`
                   } else {
