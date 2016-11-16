@@ -275,6 +275,20 @@ $(function() {
 
   console.log(customLodashNames)
 
+  var eagerForImplementationText = [
+    '我在这儿等着你实现呀等着你实现，快来实现我~~~',
+    '快来实现我呀，程序员MM/GG',
+    '再不实现我，就把你的电脑吃掉！',
+    'Hello World!',
+    '现在写的程序，就是以后工资卡上的工资！',
+    '不会写就查文档！！！',
+    '现在不实现我，以后可就没机会了哦~',
+    '没有人来实现我，我好寂寞...',
+    '快来和我玩',
+    '不要等到面试的时候再后悔哦',
+    '谢大喵今天早上 10 点到教室，赶紧趁他来之前多刷几首题！',
+  ]
+
   Promise.all(implementations.map(it=>it.url).map(loadScript))
     .then(function() {//所有实现都加载完成了
       _.forOwn(_, function(fn, methodName, lodash) {// 开始测某一个方法是否正确
@@ -295,7 +309,7 @@ $(function() {
           testResult = customFunctions
             .map(customMethod => {
               if (!_.isFunction(customMethod)) {
-                return `<td class="unimplemented" title="我在这儿等着你实现呀等着你实现，快来实现我~~~">未实现</td>`
+                return `<td class="unimplemented" title="${eagerForImplementationText[parseInt(Math.random()*eagerForImplementationText.length)]}">未实现</td>`
               } else {
                 try {
                   customReturnValue = customMethod.apply(null, _.cloneDeep(testCase))
