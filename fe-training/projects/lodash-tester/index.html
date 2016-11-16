@@ -47,6 +47,7 @@
     td {
       position: relative;
       text-align: center;
+      cursor: pointer;
       /*border: 2px solid;*/
     }
     td:hover {
@@ -117,6 +118,10 @@
       url: 'https://moolan-d.github.io/SunGaoJie-lodash.js',
     }, {
       url: 'https://nostalgia0320.github.io/GuoJunChao-lodash.js',
+    }, {
+      url: 'https://zhuangfeilong.github.io/ZhuangFeiLong-lodash.js',
+    }, {
+      url: 'https://gaogao-li.github.io/LiGaoWei-lodash.js',
     }].filter(it=>it.url).sort((a,b) => {
       return getName(a.url).toLowerCase() > 
         getName(b.url).toLowerCase() ? 1 : -1
@@ -243,7 +248,7 @@
         </script>
       </tr>
       <tr>
-        <th><a target="_blank" href="https://lodash.com/docs/">函数</a></th>
+        <th><a target="_blank" href="https://lodash.com/docs/" title="点击直达文档首页">函数名</a></th>
         <script>
           implementations.map(it => {
             document.write(`
@@ -277,6 +282,7 @@ $(function() {
         var customReturnValue//自己实现的返回值
         var testResult//测试结果
         var customFunctions//所有人自己实现的函数
+        var inputAndOutput//程序的输入与输出
         if (testCases.hasOwnProperty(methodName)) { //有测试数据才测
           // debugger
           testCase = _.cloneDeep(testCases[methodName][0])//先只测一个数据
@@ -289,13 +295,14 @@ $(function() {
               } else {
                 try {
                   customReturnValue = customMethod.apply(null, _.cloneDeep(testCase))
+                  inputAndOutput = `输入：${_.escape(JSON.stringify(testCase))}\n输出：${_.escape(JSON.stringify(customReturnValue))}`
                   if (_.isEqual(lodashReturnValue, customReturnValue)) {
-                    return `<td class="pass">通过</td>`
+                    return `<td class="pass" title="${inputAndOutput}">通过</td>`
                   } else {
-                    return `<td class="unpass">未通过</td>`
+                    return `<td class="unpass" title="${inputAndOutput}">未通过</td>`
                   }
                 } catch(e) {
-                  return `<td class="error">运行错误</td>`
+                  return `<td class="error" title="${e}">运行错误</td>`
                 }
               }
             }).join('')
