@@ -264,6 +264,7 @@
 </body>
 <script src="libs/lodash.min.js"></script>
 <script src="libs/jquery-3.1.1.min.js"></script>
+<script src="libs/beautify.js"></script>
 <script>
 $(function() {
   // debugger
@@ -283,6 +284,9 @@ $(function() {
         var testResult//测试结果
         var customFunctions//所有人自己实现的函数
         var inputAndOutput//程序的输入与输出
+        var sourceCode//函数源代码
+        var input//函数的输入
+        var inputOutputAndSourceCode//输入输出与源代码
         if (testCases.hasOwnProperty(methodName)) { //有测试数据才测
           // debugger
           testCase = _.cloneDeep(testCases[methodName][0])//先只测一个数据
@@ -291,18 +295,21 @@ $(function() {
           testResult = customFunctions
             .map(customMethod => {
               if (!_.isFunction(customMethod)) {
-                return `<td class="unimplemented">未实现</td>`
+                return `<td class="unimplemented" title="我在这儿等着你实现呀等着你实现，快来实现我~~~">未实现</td>`
               } else {
                 try {
                   customReturnValue = customMethod.apply(null, _.cloneDeep(testCase))
-                  inputAndOutput = `输入：${_.escape(JSON.stringify(testCase))}\n输出：${_.escape(JSON.stringify(customReturnValue))}`
+                  input = _.escape(methodName+'('+JSON.stringify(testCase).match(/\[(.*)\]/)[1])+')'
+                  inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}`
+                  sourceCode = _.escape(js_beautify(customMethod.toString(), {}))
+                  inputOutputAndSourceCode = `${inputAndOutput}\n源码：\n${sourceCode}`
                   if (_.isEqual(lodashReturnValue, customReturnValue)) {
-                    return `<td class="pass" title="${inputAndOutput}">通过</td>`
+                    return `<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`
                   } else {
-                    return `<td class="unpass" title="${inputAndOutput}">未通过</td>`
+                    return `<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`
                   }
                 } catch(e) {
-                  return `<td class="error" title="${e}">运行错误</td>`
+                  return `<td class="error" title="错误：${e}\n源码：\n${sourceCode}">运行错误</td>`
                 }
               }
             }).join('')
