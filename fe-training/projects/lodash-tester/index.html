@@ -82,6 +82,7 @@
       var customLodashName = fileName.match(/(.*)-lodash\.js/)[1]
       return customLodashName
     }
+    var getName = getImplementerNameFromUrl
   </script>
   <script>
     var implementations = [{
@@ -116,7 +117,10 @@
       url: 'https://moolan-d.github.io/SunGaoJie-lodash.js',
     }, {
       url: 'https://nostalgia0320.github.io/GuoJunChao-lodash.js',
-    }].filter(it=>it.url)
+    }].filter(it=>it.url).sort((a,b) => {
+      return getName(a.url).toLowerCase() > 
+        getName(b.url).toLowerCase() ? 1 : -1
+    })
 
     var testCases = {
       chunk: [
