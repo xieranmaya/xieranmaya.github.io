@@ -1,8 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>大喵牌前端培训</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+    .result-table {
+      /*width: 100%;*/
+      margin: auto;
+      overflow: hidden;
+      border-collapse: collapse;
+    }
+    .unimplemented {
+      background-color: rgba(170,170,170,.5);
+    }
+    .pass {
+      background-color: rgba(46,204,64,.5);
+    }
+    .unpass {
+      background-color: rgba(255,255,0,.5);
+    }
+    .error {
+      background-color: rgba(255,65,54,.5);
+    }
+    .result-table tr:hover td{
+      /*background-color: transparent;*/
+    }
+    td {
+      position: relative;
+    }
+    td:hover::before,
+    td:hover::after {
+      content: '';
+      width: 100%;
+      height: 999999px;
+      position: absolute;
+      left: 0;
+      top: -9999px;
+      background-color: rgba(0,0,0,0.2);
+      pointer-events: none;
+      z-index: -5;
+    }
+    td:hover::before {
+      height: 100%;
+      width: 99999px;
+      top: 0;
+      left: -9999px;
+    }
+    th {
+      /*background-color: black;*/
+      /*color: white;*/
+    }
+  </style>
   <script>
     function getImplementerNameFromUrl(url) {
       var parts = url.split('/')
@@ -10,11 +61,10 @@
       var customLodashName = fileName.match(/(.*)-lodash\.js/)[1]
       return customLodashName
     }
-
   </script>
   <script>
     var implementations = [{
-      // url: 'implementations/xieran-lodash.js',
+      url: 'https://dongliang1993.github.io/DongLiang-lodash.js',
     }, {
       url: 'https://jeane-zz.github.io/ZhangDZ-lodash.js',
     }, {
@@ -26,7 +76,7 @@
     }, {
       url: 'implementations/liZhi-lodash.js',
     }, {
-      url: 'https://wangyulong666.github.io/WangYuLong-lodash.js'
+      url: 'https://wangyulong666.github.io/WangYuLong-lodash.js',
     }].filter(it=>it.url)
 
     var testCases = {
@@ -82,57 +132,6 @@
       ]
     }
   </script>
-  <style>
-    h1 {
-      text-align: center;
-    }
-    .result-table {
-      /*width: 100%;*/
-      margin: auto;
-      overflow: hidden;
-      border-collapse: collapse;
-    }
-    .unimplemented {
-      background-color: rgba(170,170,170,.5);
-    }
-    .pass {
-      background-color: rgba(46,204,64,.5);
-    }
-    .unpass {
-      background-color: rgba(255,255,0,.5);
-    }
-    .error {
-      background-color: rgba(255,65,54,.5);
-    }
-    .result-table tr:hover td{
-      /*background-color: transparent;*/
-    }
-    td {
-      position: relative;
-    }
-    td:hover::before,
-    td:hover::after {
-      content: '';
-      width: 100%;
-      height: 999999px;
-      position: absolute;
-      left: 0;
-      top: -9999px;
-      background-color: rgba(0,0,0,0.2);
-      pointer-events: none;
-      z-index: -5;
-    }
-    td:hover::before {
-      height: 100%;
-      width: 99999px;
-      top: 0;
-      left: -9999px;
-    }
-    th {
-      /*background-color: black;*/
-      /*color: white;*/
-    }
-  </style>
 </head>
 <body>
   <h1>大喵牌前端培训Lodash实践项目实时结果</h1>
