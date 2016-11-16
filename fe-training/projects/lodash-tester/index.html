@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+    function getImplementerNameFromUrl(url) {
+      var parts = url.split('/')
+      var fileName = parts[parts.length - 1]
+      var customLodashName = fileName.match(/(.*)-lodash\.js/)[1]
+      return customLodashName
+    }
+
+  </script>
+  <script>
+    var implementations = [{
+      url: 'implementations/xieran-lodash.js',
+      implementer: 'abc',
+    }, {
+      // url: 'implementations/xr-lodash.js',
+      implementer: 'def',
+    }, {
+      url: 'implementations/TianXiaoBo-lodash.js',
+      implementer: 'txb',
+    }, {
+      url: 'implementations/ShiFangHong-lodash.js',
+    }, {
+      url: 'implementations/WuFang-lodash.js',
+    }, {
+      url: 'implementations/liZhi-lodash.js',
+    }].filter(it=>it.url)
+
+    var testCases = {
+      chunk: [
+        [['a', 'b', 'c', 'd'], 2],
+        [['a', 'b', 'c', 'd'], 3],
+      ],
+      compact: [
+        [[0, 1, false, 2, '', 3]],
+        [[1, 0, false, '', NaN]],
+      ],
+      concat: [
+        [[1], 2, [3], [[4]]],
+      ],
+      difference: [
+        [[2, 1], [2, 3]],
+        [[1,2,3,4], [2,3,4,5]],
+      ],
+      drop: [
+        [[1, 2, 3], 5],
+        [[1, 2, 3]],
+      ],
+      dropRight: [
+        [[1, 2, 3], 5],
+        [[1, 2, 3]],
+      ],
+      fill: [
+        [[4, 6, 8, 10], '*', 1, 3],
+        [Array(3), 2],
+        [[1, 2, 3], 'a'],
+      ],
+      flatten: [
+        [[1, [2, [3, [4]], 5]]],
+      ],
+      flattenDeep: [
+        [[1, [2, [3, [4]], 5]]],
+      ],
+      fromPairs: [
+        [['a', 1], ['b', 2]],
+      ],
+      head: [
+        [[1, 2, 3]],
+      ],
+      indexOf: [
+        [[1, 2, 1, 2], 2],
+        [[1, 2, 1, 2], 2, 2]
+      ],
+      initial: [
+        [[1, 2, 3]]
+      ],
+      intersection: [
+        [[2, 1], [2, 3]]
+      ]
+    }
+  </script>
+  <style>
+    .not-implemented {
+      background-color: grey;
+    }
+    .pass {
+      background-color: green;
+    }
+    .not-pass {
+      background-color: yellow;
+    }
+    .error {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>大喵牌前端培训Lodash实践项目实时结果</h1>
+  <table border=1>
+    <tbody id="result-body">
+      <tr>
+        <th>函数</th>
+        <script>
+          implementations.map(it => {
+            document.write(`<th>${getImplementerNameFromUrl(it.url)}</th>`)
+          })
+        </script>
+      </tr>
+    </tbody>
+  </table>
+</body>
+<!-- <script src="libs/underscore.js"></script> -->
+<script src="libs/lodash.min.js"></script>
+<script src="libs/jquery-3.1.1.min.js"></script>
+<script>
+$(function() {
+  // debugger
+  var customLodashNames = implementations
+    .filter(it => it.url)
+    .map(it => it.url)
+    .map(getImplementerNameFromUrl)
+
+  console.log(customLodashNames)
+
+  Promise.all(implementations.map(it=>it.url).map(loadScript))
+    .then(function() {//所有实现都加载完成了
+      _.forOwn(_, function(fn, methodName, lodash) {// 开始测某一个方法是否正确
+        var testCase// 测试数据
+        var lodashReturnValue//lodash的返回值
+        var customReturnValue//自己实现的返回值
+        var testResult//测试结果
+        var customFunctions//所有人自己实现的函数
+        if (testCases.hasOwnProperty(methodName)) { //有测试数据才测
+          // debugger
+          testCase = testCases[methodName][0]//先只测一个数据
+          lodashReturnValue = fn.apply(_, testCase)
+          customFunctions = customLodashNames.map(customLodash=>window[customLodash][methodName])
+          testResult = customFunctions
+            .map(customMethod => {
+              if (!_.isFunction(customMethod)) {
+                return `<td class="not-implemented">未实现</td>`
+              } else {
+                try {
+                  customReturnValue = customMethod.apply(null, testCase)
+                  if (_.isEqual(lodashReturnValue, customReturnValue)) {
+                    return `<td class="pass">通过</td>`
+                  } else {
+                    return `<td class="not-pass">未通过</td>`
+                  }
+                } catch(e) {
+                  return `<td class="error">运行错误</td>`
+                }
+              }
+            }).join('')
+          testResult = `<tr><th>${methodName}</th>${testResult}</tr>`
+          $('#result-body').append(testResult)
+        }
+      })
+    })
+})
+
+function loadScript(src) {
+  return new Promise(function(resolve,reject) {
+    var script = document.createElement('script')
+    script.src = src
+    document.body.appendChild(script)
+    script.onload = resolve
+    script.onerror = resolve
+  })
+}
+
+</script>
+</html>
