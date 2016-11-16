@@ -25,6 +25,8 @@
       url: 'implementations/WuFang-lodash.js',
     }, {
       url: 'implementations/liZhi-lodash.js',
+    }, {
+      url: 'https://wangyulong666.github.io/WangYuLong-lodash.js'
     }].filter(it=>it.url)
 
     var testCases = {
@@ -85,28 +87,26 @@
       text-align: center;
     }
     .result-table {
-      width: 100%;
+      /*width: 100%;*/
+      margin: auto;
       overflow: hidden;
       border-collapse: collapse;
     }
-    .not-implemented {
-      background-color: #aaa;
+    .unimplemented {
+      background-color: rgba(170,170,170,.5);
     }
     .pass {
-      background-color: #2ECC40;
+      background-color: rgba(46,204,64,.5);
     }
-    .not-pass {
-      background-color: yellow;
+    .unpass {
+      background-color: rgba(255,255,0,.5);
     }
     .error {
-      background-color: #FF4136;
+      background-color: rgba(255,65,54,.5);
     }
     .result-table tr:hover td{
-      background-color: transparent;
+      /*background-color: transparent;*/
     }
-    /*tr:hover {
-      background-color: #39cccc;
-    }*/
     td {
       position: relative;
     }
@@ -118,9 +118,9 @@
       position: absolute;
       left: 0;
       top: -9999px;
-      background-color: rgba(57, 204, 204, 0.5);
+      background-color: rgba(0,0,0,0.2);
       pointer-events: none;
-      z-index: 5;
+      z-index: -5;
     }
     td:hover::before {
       height: 100%;
@@ -178,14 +178,14 @@ $(function() {
           testResult = customFunctions
             .map(customMethod => {
               if (!_.isFunction(customMethod)) {
-                return `<td class="not-implemented">未实现</td>`
+                return `<td class="unimplemented">未实现</td>`
               } else {
                 try {
                   customReturnValue = customMethod.apply(null, testCase)
                   if (_.isEqual(lodashReturnValue, customReturnValue)) {
                     return `<td class="pass">通过</td>`
                   } else {
-                    return `<td class="not-pass">未通过</td>`
+                    return `<td class="unpass">未通过</td>`
                   }
                 } catch(e) {
                   return `<td class="error">运行错误</td>`
