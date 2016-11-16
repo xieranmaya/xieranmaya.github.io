@@ -231,6 +231,14 @@
   <table border=1 class="result-table">
     <tbody id="result-body">
       <tr>
+        <th>0</th>
+        <script>
+          implementations.map((it, index) => {
+            document.write(`<th>${index+1}</th>`)
+          })
+        </script>
+      </tr>
+      <tr>
         <th><a target="_blank" href="https://lodash.com/docs/">函数</a></th>
         <script>
           implementations.map(it => {
