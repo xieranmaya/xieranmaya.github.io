@@ -30,6 +30,10 @@
     }
     td {
       position: relative;
+      /*border: 2px solid;*/
+    }
+    td:hover {
+      border: 1px solid #001f3f;
     }
     td:hover::before,
     td:hover::after {
@@ -70,13 +74,21 @@
     }, {
       url: 'https://grassrootscoder.github.io/TianXiaoBo-lodash.js',
     }, {
-      url: 'implementations/ShiFangHong-lodash.js',
+      // url: 'implementations/ShiFangHong-lodash.js',
     }, {
-      url: 'implementations/WuFang-lodash.js',
+      // url: 'implementations/WuFang-lodash.js',
     }, {
-      url: 'implementations/liZhi-lodash.js',
+      // url: 'implementations/liZhi-lodash.js',
     }, {
       url: 'https://wangyulong666.github.io/WangYuLong-lodash.js',
+    }, {
+      url: 'https://li-z.github.io/LiZhi-lodash.js',
+    }, {
+      url: 'https://incisa.github.io/my-lodash/YuLei-lodash.js',
+    }, {
+      url: 'https://julywz.github.io/my-lodash/WuFang-lodash.js',
+    }, {
+      // url: 'https://iotgtkol.github.io/LiuWei-lodash.js',
     }].filter(it=>it.url)
 
     var testCases = {
@@ -191,7 +203,7 @@ $(function() {
                 }
               }
             }).join('')
-          testResult = `<tr><th>${methodName}</th>${testResult}</tr>`
+          testResult = `<tr><th><a target="_blank" href="https://lodash.com/docs/4.17.1#${methodName}">${methodName}</a></th>${testResult}</tr>`
           $('#result-body').append(testResult)
         }
       })
@@ -207,7 +219,6 @@ function loadScript(src) {
     script.onerror = resolve
   })
 }
-
 </script>
 <script>
 var _hmt = _hmt || [];
