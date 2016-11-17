@@ -38,9 +38,9 @@
     .result-table tr:hover td{
       /*background-color: transparent;*/
     }
-    tr:first-child th {
-      width: 4em;
-      max-width: 4em;
+    tr:nth-child(2) th {
+      width: 5em;
+      max-width: 5em;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -122,6 +122,14 @@
       url: 'https://zhuangfeilong.github.io/ZhuangFeiLong-lodash.js',
     }, {
       url: 'https://gaogao-li.github.io/LiGaoWei-lodash.js',
+    }, {
+      url: 'https://shenxiaobai.github.io/ShenXiaoBai-lodash.js',
+    }, {
+      url: 'https://theworld1992.github.io/WangYaWei-lodash.js',
+    }, {
+      url: 'https://therunwolf.github.io/ShiFangHong-lodash.js',
+    }, {
+      url: 'https://wuyinlong.github.io/WuYinLong-lodash.js',
     }].filter(it=>it.url).sort((a,b) => {
       return getName(a.url).toLowerCase() > 
         getName(b.url).toLowerCase() ? 1 : -1
@@ -305,14 +313,15 @@ $(function() {
           // debugger
           testCase = _.cloneDeep(testCases[methodName][0])//先只测一个数据
           lodashReturnValue = fn.apply(_, testCase)
-          customFunctions = customLodashNames.map(customLodash=>window[customLodash][methodName])
+          customLodashs = customLodashNames.map(name=>window[name])
+          customFunctions = customLodashNames.map(name=>window[name][methodName])
           testResult = customFunctions
-            .map(customMethod => {
+            .map((customMethod,index) => {
               if (!_.isFunction(customMethod)) {
-                return `<td class="unimplemented" title="${eagerForImplementationText[parseInt(Math.random()*eagerForImplementationText.length)]}">未实现</td>`
+                return `<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`
               } else {
                 try {
-                  customReturnValue = customMethod.apply(null, _.cloneDeep(testCase))
+                  customReturnValue = customMethod.apply(customLodashs[index], _.cloneDeep(testCase))
                   input = _.escape(methodName+'('+JSON.stringify(testCase).match(/\[(.*)\]/)[1])+')'
                   inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}`
                   sourceCode = _.escape(js_beautify(customMethod.toString(), {}))
