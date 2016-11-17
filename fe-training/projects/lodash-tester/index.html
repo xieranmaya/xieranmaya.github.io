@@ -35,6 +35,10 @@
     .error {
       background-color: rgba(255,65,54,.5);
     }
+    .syntax-error {
+      background-color: black;
+      color: white;
+    }
     .result-table tr:hover td{
       /*background-color: transparent;*/
     }
@@ -433,6 +437,9 @@ $(function() {
                     return `<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`
                   }
                 } catch(e) {
+                  if (e == '语法错误') {
+                    return `<td class="syntax-error" title="请自行检查">语法错误</td>`
+                  }
                   return `<td class="error" title="错误：${e}\n源码：\n${sourceCode}">运行错误</td>`
                 }
               }
@@ -445,12 +452,33 @@ $(function() {
 })
 
 function loadScript(src) {
-  return new Promise(function(resolve,reject) {
+  return fetch(src).then(js=>js.text()).then(code => {
+    // console.log(src)
+    var codeName = getName(src)
+    code = js_beautify(code).replace(`var ${codeName}`, `window.${codeName}`)
+    console.log(code)
+    try {
+      eval(code)
+      return
+    } catch(e) {
+      var Lodash = {}
+      var syntaxErrorFn = function() {
+        throw '语法错误'
+      }
+      Object.keys(testCases).forEach(methodName => {Lodash[methodName] = syntaxErrorFn})
+      window[codeName] = Lodash
+    }
+  })
+
+  return new Promise(function(resolve, reject) {
     var script = document.createElement('script')
     script.src = src
     document.body.appendChild(script)
     script.onload = resolve
-    script.onerror = resolve
+    script.onerror = function(e) {
+      console.log(e)
+      resolve()
+    }
   })
 }
 </script>
