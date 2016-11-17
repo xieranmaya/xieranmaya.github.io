@@ -409,7 +409,7 @@ $(function() {
                 try {
                   customReturnValue = customMethod.apply(customLodashs[index], _.cloneDeep(testData))
                   input = _.escape(methodName+'('+JSON.stringify(testData).match(/\[(.*)\]/)[1])+')'
-                  inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}`
+                  inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}\n期望：${_.escape(JSON.stringify(lodashReturnValue))}`
                   sourceCode = _.escape(js_beautify(customMethod.toString(), {}))
                   inputOutputAndSourceCode = `${inputAndOutput}\n源码：\n${sourceCode}`
                   if (_.isEqual(lodashReturnValue, customReturnValue)) {
