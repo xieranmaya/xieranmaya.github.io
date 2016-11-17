@@ -168,10 +168,10 @@
         [[1, [2, [3, [4]], 5]]],
       ],
       flattenDeep: [
-        [[1, [2, [3, [4]], 5]]],
+        [[1, [2, [3, [4]], 5]],[6,[7]]],
       ],
       fromPairs: [
-        [['a', 1], ['b', 2]],
+        [[['a', 1], ['b', 2]]],
       ],
       head: [
         [[1, 2, 3]],
@@ -239,7 +239,83 @@
       ],
       xor: [
         [[2, 1], [2, 3]]
-      ]
+      ],
+      // 以下为字符串相关函数的测试数据
+      camelCase: [
+        ['Foo Bar'],
+        ['--foo-bar--'],
+        ['__FOO_BAR__']
+      ],
+      capitalize: [
+        ['FRED']
+      ],
+      deburr: [
+        ['déjà vu']
+      ],
+      endsWith: [
+        ['abc', 'c'],
+        ['abc', 'b'],
+        ['abc', 'b', 2]
+      ],
+      escape: [
+        ['fred, barney, & pebbles']
+      ],
+      escapeRegExp: [
+        ['[lodash](https://lodash.com/)']
+      ],
+      kebabCase: [
+        ['Foo Bar'],
+        ['fooBar'],
+        ['__FOO_BAR__']
+      ],
+      lowerCase: [
+        ['--Foo-Bar--'],
+        ['fooBar'],
+        ['__FOO_BAR__']
+      ],
+      lowerFirst: [
+        ['Fred'],
+        ['FRED']
+      ],
+      pad: [
+        ['abc', 8],
+        ['abc', 8, '_-'],
+        ['abc', 3]
+      ],
+      padEnd: [
+        ['abc', 6],
+        ['abc', 6, '_-'],
+        ['abc', 3]
+      ],
+      padStart: [
+        ['abc', 6],
+        ['abc', 6, '_-'],
+        ['abc', 3]
+      ],
+      parseInt: [
+        ['08']
+      ],
+      repeat: [
+        ['*', 3],
+        ['abc', 2],
+        ['abc', 0]
+      ],
+      replace: [
+        ['Hi Fred', 'Fred', 'Barney']
+      ],
+      snakeCase: [
+        ['Foo Bar'],
+        ['fooBar'],
+        ['--FOO-BAR--']
+      ],
+      split: [
+        ['a-b-c', '-', 2]
+      ],
+      startCase: [
+        ['--foo-bar--'],
+        ['fooBar'],
+        ['__FOO_BAR__']
+      ],
     }
   </script>
 </head>
