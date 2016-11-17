@@ -394,7 +394,9 @@ $(function() {
 
   Promise.all(implementations.map(it=>it.url).map(loadScript))
     .then(function() {//所有实现都加载完成了
-      _.forOwn(_, function(fn, methodName, lodash) {// 开始测某一个方法是否正确
+      // _.forOwn(_, function(fn, methodName) {// 开始测某一个方法是否正确，按方法在lodash里面出现的顺序测
+      Object.keys(testCases).forEach(methodName => {// 按照testCases里面的顺序测试
+        var fn = _[methodName]
         var testData// 测试数据
         var lodashReturnValue//lodash的返回值
         var customReturnValue//自己实现的返回值
@@ -406,7 +408,7 @@ $(function() {
         var inputOutputAndSourceCode//输入输出与源代码
         if (testCases.hasOwnProperty(methodName)) { //有测试数据才测
           debugger
-          testData = testCases[methodName][0]//先只测一个数据
+          testData = _.sample(testCases[methodName])//[0]//先只测一个数据
           lodashReturnValue = fn.apply(_, _.cloneDeep(testData))
           customLodashs = customLodashNames.map(name=>window[name])
           customFunctions = customLodashNames.map(name=>window[name][methodName])
