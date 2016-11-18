@@ -18,7 +18,8 @@
       color: #001f3f;
     }
     .result-table {
-      /*width: 100%;*/
+      width: 100%;
+      /*table-layout: fixed;*/
       margin: auto;
       overflow: hidden;
       border-collapse: collapse;
@@ -42,9 +43,36 @@
     .result-table tr:hover td{
       /*background-color: transparent;*/
     }
-    tr:nth-child(2) th {
-      width: 5em;
+    tr:nth-child(2) {
+/*      position: fixed;
+      top: 0;
+      background-color: white !important;
+      /*width: 100%;
+      left: 0;
+      right: 0;
+      z-index: 10;*/
+    }
+    table:first-of-type {
+      position: fixed;
+      top: 0;
+      width: calc(100% - 16px);
+      background-color: white;
+      z-index: 10;
+      border: 1px solid black;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+    table:first-of-type tr > * {
+      border: 1px solid;
+    }
+    table:first-of-type.show {
+      opacity: 1;
+    }
+    tr:nth-child(-n + 2) th,
+    tr>th:first-child{
+      /*width: 5em;*/
       max-width: 5em;
+      min-width: 5em;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -374,6 +402,22 @@
 <body>
   <h1>大喵教育前端培训 Lodash 实践项目实时状态</h1>
   <table border=1 class="result-table">
+    <tbody>
+      <tr>
+        <th><a target="_blank" href="https://lodash.com/docs/" title="点击直达文档首页">函数名</a></th>
+        <script>
+          implementations.map(it => {
+            document.write(`
+              <th title="${getImplementerNameFromUrl(it.url)}">
+              <a target="_blank" href="${it.url}">${getImplementerNameFromUrl(it.url)}</a>
+              </th>
+            `)
+          })
+        </script>
+      </tr>
+    </tbody>
+  </table>
+  <table border=1 class="result-table">
     <tbody id="result-body">
       <tr>
         <th>0</th>
@@ -403,6 +447,13 @@
 <script src="libs/beautify.js"></script>
 <script>
 $(function() {
+  $(window).on('scroll', _.throttle(function(){
+    if (window.scrollY > 135) {
+      $("table:first-of-type").addClass('show')
+    } else {
+      $("table:first-of-type").removeClass('show')
+    }
+  },100))
   // debugger
   var customLodashNames = implementations
     .filter(it => it.url)
