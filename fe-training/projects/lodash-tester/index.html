@@ -43,6 +43,9 @@
     .result-table tr:hover td{
       /*background-color: transparent;*/
     }
+    .result-table td {
+      -webkit-user-select: none;
+    }
     tr:nth-child(2) {
 /*      position: fixed;
       top: 0;
@@ -501,8 +504,8 @@ $(function() {
   Promise.all(implementations.map(it=>it.url).map(loadScript))
     .then(function() {//所有实现都加载完成了
       // _.forOwn(_, function(fn, methodName) {// 开始测某一个方法是否正确，按方法在lodash里面出现的顺序测
-      var timeout = 0;
-      var timegap = 0;
+      var timeout = 0;//让setTimeout顺次执行
+      var timegap = 0;//每个之间的间隔时间，最终就是setTimeout(fn, timeout++*timegap)
       Object.keys(testCases).forEach((methodName, index) => {// 按照testCases里面的顺序测试
         setTimeout(function() {
           $('#result-body').append(`<tr><th><a target="_blank" href="https://lodash.com/docs/#${methodName}">${methodName}</a></th></tr>`)
@@ -623,7 +626,7 @@ function loadScript(src) {
   var _hmt = _hmt || [];
   (function() {
     var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?2243d09d24f5e80836f6b9d3a08d9fb0";
+    hm.src = (location.protocol == 'file:' ? 'http:' : 'https:') + "//hm.baidu.com/hm.js?2243d09d24f5e80836f6b9d3a08d9fb0";
     var s = document.getElementsByTagName("script")[0]; 
     s.parentNode.insertBefore(hm, s);
   })();
