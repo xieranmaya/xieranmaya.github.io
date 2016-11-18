@@ -428,11 +428,11 @@ $(function() {
               if (!_.isFunction(customMethod)) {
                 return `<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`
               } else {
+                sourceCode = _.escape(js_beautify(customMethod.toString()))
                 try {
                   customReturnValue = customMethod.apply(customLodashs[index], _.cloneDeep(testData))
                   input = _.escape(methodName+'('+JSON.stringify(testData, (k,v)=>typeof v == 'function'?v.toString():v).match(/\[(.*)\]/)[1])+')'
                   inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}\n期望：${_.escape(JSON.stringify(lodashReturnValue))}`
-                  sourceCode = _.escape(js_beautify(customMethod.toString(), {}))
                   inputOutputAndSourceCode = `${inputAndOutput}\n源码：\n${sourceCode}`
                   if (_.isEqual(lodashReturnValue, customReturnValue)) {
                     return `<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`
