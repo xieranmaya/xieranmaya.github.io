@@ -477,7 +477,7 @@ function loadScript(src) {
     // console.log(src)
     var codeName = getName(src)
     code = js_beautify(code).replace(`var ${codeName}`, `window.${codeName}`)
-    console.log(code)
+    // console.log(code)
     try {
       eval(code)
       return
