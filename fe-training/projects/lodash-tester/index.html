@@ -428,7 +428,7 @@ $(function() {
     .then(function() {//所有实现都加载完成了
       // _.forOwn(_, function(fn, methodName) {// 开始测某一个方法是否正确，按方法在lodash里面出现的顺序测
       var timeout = 0;
-      var timegap = 30;
+      var timegap = 0;
       Object.keys(testCases).forEach((methodName, index) => {// 按照testCases里面的顺序测试
         setTimeout(function() {
           $('#result-body').append(`<tr><th><a target="_blank" href="https://lodash.com/docs/#${methodName}">${methodName}</a></th></tr>`)
