@@ -92,6 +92,13 @@
       var customLodashName = fileName.match(/(.*)-lodash\.js/)[1]
       return customLodashName
     }
+    function getNickName(url) {
+      var nickName = url.match(/\/\/(.*?)\//)[1]
+      if (nickName)
+        return nickName
+      else
+        return getName(url)
+    }
     var getName = getImplementerNameFromUrl
   </script>
   <script>
@@ -122,7 +129,7 @@
     }, {
       url: 'https://titancx.github.io/CaiQinChen-lodash.js',
     }, {
-      url: 'https://gongqiyi.github.io/FangTianYi-lodash.js',
+      url: 'https://wuyinlong.github.io/WuYinLong-lodash.js',
     }, {
       url: 'https://moolan-d.github.io/SunGaoJie-lodash.js',
     }, {
@@ -138,10 +145,12 @@
     }, {
       url: 'https://therunwolf.github.io/ShiFangHong-lodash.js',
     }, {
-      url: 'https://wuyinlong.github.io/WuYinLong-lodash.js',
+      url: 'https://gongqiyi.github.io/FangTianYi-lodash.js',
+    }, {
+      // url: 'implementations/xieran-lodash.js',
     }]
     .filter(it=>it.url)
-    // .filter(it=>it.url.indexOf('Cai'))//用于调bug时把人数降为1
+    // .filter(it=>it.url.indexOf('WangYu')>0)//用于调bug时把人数降为1
     .sort((a, b) => {//按姓名拼音序排序
       return getName(a.url).toLowerCase() > getName(b.url).toLowerCase() ? 1 : -1
     })
@@ -277,9 +286,6 @@
       capitalize: [
         ['FRED']
       ],
-      deburr: [
-        ['déjà vu']
-      ],
       endsWith: [
         ['abc', 'c'],
         ['abc', 'b'],
@@ -344,14 +350,13 @@
         ['fooBar'],
         ['__FOO_BAR__']
       ],
+      deburr: [
+        ['déjà vu']
+      ],
     }
     // 用于测试时把测试的函数个数降为1
     // testCases = {
-    //   reverse: [
-    //     [
-    //       [1,2,3]
-    //     ]
-    //   ]
+    //   filter: testCases.filter
     // }
   </script>
 </head>
