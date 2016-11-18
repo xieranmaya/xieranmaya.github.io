@@ -489,8 +489,22 @@ $(function() {
     })
 })
 
+function getAndSaveCode(src) {
+  return fetch(src).then(it=>it.text()).then(code=>{
+    localStorage[src] = code
+    return code
+  })
+}
+
 function loadScript(src) {
-  return fetch(src).then(js=>js.text()).then(code => {
+  return Promise.resolve().then(function(){
+    if (localStorage[src]) {
+      getAndSaveCode(src)//下载，以便下回使用
+      return localStorage[src]
+    } else {
+      return getAndSaveCode(src)
+    }
+  }).then(code => {
     // console.log(src)
     var codeName = getName(src)
     code = js_beautify(code).replace(`var ${codeName}`, `window.${codeName}`)
