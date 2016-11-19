@@ -4623,123 +4623,112 @@ $(function() {
           $('#result-body').append(`<tr><th><a target="_blank" href="https://lodash.com/docs/#${methodName}">${methodName}</a></th></tr>`)
         }, timeout++*timegap)
         ;(function() {
-          // testCases[methodName].map(testData => {
-            let fn = _[methodName]
-            let testData// 测试数据
-            let lodashReturnValue//lodash的返回值
-            let customReturnValue//自己实现的返回值
-            let testResult//测试结果
-            let customFunctions//所有人自己实现的函数
-            let inputAndOutput//程序的输入与输出
-            let sourceCode//函数源代码
-            let input//函数的输入
-            let inputOutputAndSourceCode//输入输出与源代码
-            // debugger
-            testData = _.sample(testCases[methodName])//[0]//先只测一个数据
-            lodashReturnValue = fn.apply(_, _.cloneDeep(testData))
-            customFunctions = customLodashNames.map(name=>window[name][methodName])
-            testResult = customFunctions.map((customFunction,index) => {
-              return test(
-                customFunction,
-                customLodashs[index],
-                testCases[methodName],
-                _[methodName],
-                _
-              )
+          let fn = _[methodName]
+          let testResult//测试结果
+          let customFunctions//所有人自己实现的函数
+          // debugger
+          customFunctions = customLodashNames.map(name=>window[name][methodName])
+          testResult = customFunctions.map((customFunction,index) => {
+            return test(
+              customFunction,
+              customLodashs[index],
+              testCases[methodName],
+              _[methodName],
+              _
+            )
+          })
+          console.log(methodName, testResult)//testResult为某一个函数对所有测试数据的测试结果
+          setTimeout(function() {
+            var row = testResult.map(result => {
+              //result是某一个人的某一个函数的在不同测试数据下的测试结果集合
+              //为数组，如果为null，则表示未实现
+              if (result) {
+                return {
+                  text: result.map(oneCaseResult => {
+                    if (oneCaseResult.pass === true) {
+                      return `输入：${oneCaseResult.input}\n输出/期望：${oneCaseResult.output}`
+                    } else if (oneCaseResult.type == 'WrongAnswer') {
+                      return `输入：${oneCaseResult.input}\n输出：${oneCaseResult.output}\n期望：${oneCaseResult.expect}`
+                    }
+                    return `错误：${oneCaseResult.error}\n输入：${oneCaseResult.input}\n期望：${oneCaseResult.expect}`
+                  }).join('\n=================\n')+`\n\n源码：\n${result[0].source}`,
+                  status: result.every(it => it.pass) ? '通过' : '未通过',
+                  passCount: result.filter(it=>it.pass).length,
+                  unpassCount: result.filter(it=>!it.pass).length,
+                }
+                // return result.every(it => it.pass)
+              } else {
+                return {
+                  status: '未实现',
+                  text: '未实现',
+                }
+              }
+            }).map(result => {
+              if (result.status == '通过') {
+                return `<td class="pass" title="${result.text}">${result.passCount}/${result.unpassCount+result.passCount}</td>`
+              } else if(result.status == '未通过') {
+                return `<td class="unpass" title="${result.text}">${result.passCount}/${result.unpassCount+result.passCount}</td>`
+              } else {
+                return `<td class="unimplemented">未实现</td>`
+              }
             })
-            console.log(methodName, testResult)//testResult为某一个函数对所有测试数据的测试结果
-            setTimeout(function() {
-              var row = testResult.map(result => {
-                //result是某一个人的某一个函数的在不同测试数据下的测试结果集合
-                //为数组，如果为null，则表示未实现
-                if (result) {
+            $('#result-body tr:last-child').append(row)
+          }, timeout++*timegap)
+          return
+          testResult = customFunctions
+            .map((customMethod,index) => {
+              setTimeout(function() {
+                if (!_.isFunction(customMethod)) {
+                  $('#result-body tr:last-child').append(`<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`)
                   return {
-                    text: result.map(oneCaseResult => {
-                      if (oneCaseResult.pass === true) {
-                        return `输入：${oneCaseResult.input}\n输出/期望：${oneCaseResult.output}`
-                      } else if (oneCaseResult.type == 'WrongAnswer') {
-                        return `输入：${oneCaseResult.input}\n输出：${oneCaseResult.output}\n期望：${oneCaseResult.expect}`
-                      }
-                      return `错误：${oneCaseResult.error}\n输入：${oneCaseResult.input}\n期望：${oneCaseResult.expect}`
-                    }).join('\n=================\n')+`\n\n源码：\n${result[0].source}`,
-                    status: result.every(it => it.pass) ? '通过' : '未通过',
-                    passCount: result.filter(it=>it.pass).length,
-                    unpassCount: result.filter(it=>!it.pass).length,
+                    status: 'Unimplemented',
                   }
-                  // return result.every(it => it.pass)
+                  // return `<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`
                 } else {
-                  return {
-                    status: '未实现',
-                    text: '未实现',
-                  }
-                }
-              }).map(result => {
-                if (result.status == '通过') {
-                  return `<td class="pass" title="${result.text}">${result.passCount}/${result.unpassCount+result.passCount}</td>`
-                } else if(result.status == '未通过') {
-                  return `<td class="unpass" title="${result.text}">${result.passCount}/${result.unpassCount+result.passCount}</td>`
-                } else {
-                  return `<td class="unimplemented">未实现</td>`
-                }
-              })
-              $('#result-body tr:last-child').append(row)
-            }, timeout++*timegap)
-            return
-            testResult = customFunctions
-              .map((customMethod,index) => {
-                setTimeout(function() {
-                  if (!_.isFunction(customMethod)) {
-                    $('#result-body tr:last-child').append(`<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`)
-                    return {
-                      status: 'Unimplemented',
-                    }
-                    // return `<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`
-                  } else {
-                    sourceCode = _.escape(js_beautify(customMethod.toString()))
-                    try {
-                      input = _.escape(methodName+'('+JSON.stringify(testData, (k,v)=>typeof v == 'function'?v.toString():v).match(/\[(.*)\]/)[1])+')'
-                      customReturnValue = customMethod.apply(customLodashs[index], _.cloneDeep(testData))
-                      inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}\n期望：${_.escape(JSON.stringify(lodashReturnValue))}`
-                      inputOutputAndSourceCode = `${inputAndOutput}\n源码：\n${sourceCode}`
-                      if (_.isEqual(lodashReturnValue, customReturnValue)) {
-                        $('#result-body tr:last-child').append(`<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`)
-                        return {
-                          status: 'Pass',
-                          input: input,
-                          output: _.escape(JSON.stringify(customReturnValue)),
-                          expect: _.escape(JSON.stringify(lodashReturnValue)),
-                        }
-                        // return `<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`
-                      } else {
-                        $('#result-body tr:last-child').append(`<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`)
-                        return {
-                          status: 'Unpass',
-                          input: input,
-                          output: _.escape(JSON.stringify(customReturnValue)),
-                          expect: _.escape(JSON.stringify(lodashReturnValue)),
-                        }
-                        // return `<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`
-                      }
-                    } catch(e) {
-                      if (e.type == 'SyntaxError') {
-                        $('#result-body tr:last-child').append(`<td class="syntax-error" title="${e.error}">语法错误</td>`)
-                        return {
-                          status: 'SyntaxError',
-                          error: e.error,
-                        }
-                        // return `<td class="syntax-error" title="${e.error}">语法错误</td>`
-                      }
-                      $('#result-body tr:last-child').append(`<td class="error" title="输入：${input}\n错误：${e}\n源码：\n${sourceCode}">运行错误</td>`)
+                  sourceCode = _.escape(js_beautify(customMethod.toString()))
+                  try {
+                    input = _.escape(methodName+'('+JSON.stringify(testData, (k,v)=>typeof v == 'function'?v.toString():v).match(/\[(.*)\]/)[1])+')'
+                    customReturnValue = customMethod.apply(customLodashs[index], _.cloneDeep(testData))
+                    inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}\n期望：${_.escape(JSON.stringify(lodashReturnValue))}`
+                    inputOutputAndSourceCode = `${inputAndOutput}\n源码：\n${sourceCode}`
+                    if (_.isEqual(lodashReturnValue, customReturnValue)) {
+                      $('#result-body tr:last-child').append(`<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`)
                       return {
-                        status: 'RuntimeError',
-                        error: e,
+                        status: 'Pass',
+                        input: input,
+                        output: _.escape(JSON.stringify(customReturnValue)),
+                        expect: _.escape(JSON.stringify(lodashReturnValue)),
                       }
-                      // return `<td class="error" title="错误：${e}\n源码：\n${sourceCode}">运行错误</td>`
+                      // return `<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`
+                    } else {
+                      $('#result-body tr:last-child').append(`<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`)
+                      return {
+                        status: 'Unpass',
+                        input: input,
+                        output: _.escape(JSON.stringify(customReturnValue)),
+                        expect: _.escape(JSON.stringify(lodashReturnValue)),
+                      }
+                      // return `<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`
                     }
+                  } catch(e) {
+                    if (e.type == 'SyntaxError') {
+                      $('#result-body tr:last-child').append(`<td class="syntax-error" title="${e.error}">语法错误</td>`)
+                      return {
+                        status: 'SyntaxError',
+                        error: e.error,
+                      }
+                      // return `<td class="syntax-error" title="${e.error}">语法错误</td>`
+                    }
+                    $('#result-body tr:last-child').append(`<td class="error" title="输入：${input}\n错误：${e}\n源码：\n${sourceCode}">运行错误</td>`)
+                    return {
+                      status: 'RuntimeError',
+                      error: e,
+                    }
+                    // return `<td class="error" title="错误：${e}\n源码：\n${sourceCode}">运行错误</td>`
                   }
-                },timeout++*timegap)
-              })
-              //.join('')
+                }
+              },timeout++*timegap)
+            })
         }())
       })
     })
