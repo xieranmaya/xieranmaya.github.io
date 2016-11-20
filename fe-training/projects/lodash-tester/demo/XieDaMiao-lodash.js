@@ -1,15 +1,15 @@
 var XieDaMiao = {
   isEqual: function isEqual(a, b) {
-    if (a !== a && b !== b) {
+    if (a !== a && b !== b) { //两个NaN
       return true
     }
-    if (typeof a !== typeof b) {
+    if (typeof a !== typeof b) { //类型不同
       return false
     }
-    if (a === b) {
+    if (a === b) { //相同的原始类型或相同的指针
       return true
     }
-    var keys = []
+    var keys = [] //存放a和b的所有key
     for (key in a) {
       if (a.hasOwnProperty(key)) {
         keys.push(key)
@@ -23,12 +23,12 @@ var XieDaMiao = {
       }
     }
     for (key of keys) {
-      if (typeof a[key] === 'object') {
+      if (typeof a[key] === 'object') { //如果类型为对象，就调用这个函数递归的比较
         if (!isEqual(a[key], b[key])) {
           return false
         }
       } else {
-        if (a[key] !== b[key]) {
+        if (a[key] !== b[key]) { //否则直接用全等来比
           return false
         }
       }
