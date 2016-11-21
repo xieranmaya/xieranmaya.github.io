@@ -35,4 +35,26 @@ var XieDaMiao = {
     }
     return true
   },
+  at: function(object, paths) {
+    var self = this
+    return paths.map(function(path) {
+      return self.get(object, path)
+    })
+  },
+  get: function(object, path, defaultValue) {
+    var path = this.toPath(path)
+    try {
+      return path.reduce(function(curObj, nextPath) {
+        return curObj[nextPath]
+      }, object)
+    } catch (e) {
+      return defaultValue
+    }
+  },
+  toPath: function(value) {
+    if (Array.isArray(value)) {
+      return value.map(String)
+    }
+    return value.replace(/^\[|\]$/g, '').split(/\[|\]\.|\./)
+  },
 }
