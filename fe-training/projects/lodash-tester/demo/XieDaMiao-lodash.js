@@ -51,10 +51,10 @@ var XieDaMiao = {
       return defaultValue
     }
   },
-  toPath: function(value) {
+  toPath: function toPath(value) {
     if (Array.isArray(value)) {
       return value.map(String)
     }
-    return value.replace(/^\[|\]$|[\'\"]/g, '').split(/\.|\[|\]|\]\.|\.\[|\]\[/)
+    return value.replace(/^\[|\]$|[\'\"]/g, '').split(/\]\.|\.\[|\]\[|\.|\[|\]/)
   },
 }
