@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>大喵教育前端培训</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/monokai-sublime.css">
   <style>
     h1 {
       text-align: center;
@@ -130,7 +132,7 @@
       margin: 0;
       z-index: 10;
       text-align: left;
-      padding: 10px;
+      /*padding: 10px;*/
       font-size: 18px;
       max-height: 500px;
       max-width: 800px;
@@ -4702,70 +4704,18 @@ $(function() {
               }
             }).map(result => {
               if (result.status == '通过') {
-                return `<td class="pass" tabindex="-1" title="点击可固定代码段">${result.passCount}/${result.unpassCount+result.passCount}<pre style="position:absolute;">${result.text}</pre></td>`
+                return `<td class="pass" tabindex="-1" title="点击可固定代码段">${result.passCount}/${result.unpassCount+result.passCount}<pre style="position:absolute;"><code class="js">${result.text}</code></pre></td>`
               } else if(result.status == '未通过') {
-                return `<td class="unpass" tabindex="-1" title="点击可固定代码段">${result.passCount}/${result.unpassCount+result.passCount}<pre style="position:absolute;">${result.text}</pre></td>`
+                return `<td class="unpass" tabindex="-1" title="点击可固定代码段">${result.passCount}/${result.unpassCount+result.passCount}<pre style="position:absolute;"><code class="js">${result.text}</code></pre></td>`
               } else {
                 return `<td class="unimplemented">未实现</td>`
               }
             })
             $('#result-body tr:last-child').append(row)
+            $('#result-body tr:last-child pre code').each(function(i, block) {
+              hljs.highlightBlock(block);
+            });
           }, timeout++*timegap)
-          return
-          testResult = customFunctions
-            .map((customMethod,index) => {
-              setTimeout(function() {
-                if (!_.isFunction(customMethod)) {
-                  $('#result-body tr:last-child').append(`<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`)
-                  return {
-                    status: 'Unimplemented',
-                  }
-                  // return `<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`
-                } else {
-                  sourceCode = _.escape(js_beautify(customMethod.toString()))
-                  try {
-                    input = _.escape(methodName+'('+JSON.stringify(testData, (k,v)=>typeof v == 'function'?v.toString():v).match(/\[(.*)\]/)[1])+')'
-                    customReturnValue = customMethod.apply(customLodashs[index], _.cloneDeep(testData))
-                    inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}\n期望：${_.escape(JSON.stringify(lodashReturnValue))}`
-                    inputOutputAndSourceCode = `${inputAndOutput}\n源码：\n${sourceCode}`
-                    if (_.isEqual(lodashReturnValue, customReturnValue)) {
-                      $('#result-body tr:last-child').append(`<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`)
-                      return {
-                        status: 'Pass',
-                        input: input,
-                        output: _.escape(JSON.stringify(customReturnValue)),
-                        expect: _.escape(JSON.stringify(lodashReturnValue)),
-                      }
-                      // return `<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`
-                    } else {
-                      $('#result-body tr:last-child').append(`<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`)
-                      return {
-                        status: 'Unpass',
-                        input: input,
-                        output: _.escape(JSON.stringify(customReturnValue)),
-                        expect: _.escape(JSON.stringify(lodashReturnValue)),
-                      }
-                      // return `<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`
-                    }
-                  } catch(e) {
-                    if (e.type == 'SyntaxError') {
-                      $('#result-body tr:last-child').append(`<td class="syntax-error" title="${e.error}">语法错误</td>`)
-                      return {
-                        status: 'SyntaxError',
-                        error: e.error,
-                      }
-                      // return `<td class="syntax-error" title="${e.error}">语法错误</td>`
-                    }
-                    $('#result-body tr:last-child').append(`<td class="error" title="输入：${input}\n错误：${e}\n源码：\n${sourceCode}">运行错误</td>`)
-                    return {
-                      status: 'RuntimeError',
-                      error: e,
-                    }
-                    // return `<td class="error" title="错误：${e}\n源码：\n${sourceCode}">运行错误</td>`
-                  }
-                }
-              },timeout++*timegap)
-            })
         }())
       })
     })
@@ -4827,6 +4777,7 @@ function loadScript(src) {
   })
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 <script>
   var _hmt = _hmt || [];
   (function() {
