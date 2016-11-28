@@ -22,6 +22,10 @@ var test = (function() {
     })
   }
 
+  function stringifyFunction(key, value) {
+    return typeof value == 'function' ? value.toString() : value
+  }
+
   /**
    * 以数据case分别测试fn和base两个函数，两个context分别为其前一个参数的context
    * 
@@ -33,67 +37,48 @@ var test = (function() {
     var output
     try {
       output = fn.apply(fnContext, _.cloneDeep(testCase))
-      if (_.isEqual(expectedOutput, output)) {
-        return {
-          pass: true,
-          input: `${fn.name}(${_.escape(JSON.stringify(testCase, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
-          output: _.escape(JSON.stringify(output)),
-          expect: _.escape(JSON.stringify(expectedOutput)),
-          source: _.escape(js_beautify(fn.toString())),
-        }
-      } else {
+    } catch (e) {
+      if (e.type == 'InfiniteLoop') {
         return {
           pass: false,
-          type: 'WrongAnswer',
+          type: e.type,
           input: `${fn.name}(${_.escape(JSON.stringify(testCase, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
-          output: _.escape(JSON.stringify(output)),
-          expect: _.escape(JSON.stringify(expectedOutput)),
-          source: _.escape(js_beautify(fn.toString())),
+          source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
         }
       }
-    } catch (e) {
+      if (e.type == 'SyntaxError') {
+        return {
+          pass: false,
+          type: e.type,
+          error: e.error,
+          // source: _.escape(infiniteLoopDetector.unwrap(e.source)),
+        }
+      }
       return {
         pass: false,
         type: 'RuntimeError',
         error: e,
         input: `${fn.name}(${_.escape(JSON.stringify(testCase, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
         expect: _.escape(JSON.stringify(expectedOutput)),
-        source: _.escape(js_beautify(fn.toString())),
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
       }
     }
-  }
-
-  function stringifyFunction(key, value) {
-    return typeof value == 'function' ? value.toString() : value
-  }
-
-  /**
-   * 自定义测试函数
-   * 使用场景一般是输出不固定的情况比如输出随机数或者小数
-   * 此时testCase实际上是一个写好的函数，运行这个函数返回true/false得到是否通过测试
-   */
-  function customTest(fn, fnContext, testCase) {
-    var pass = false
-    try {
-      pass = testCase(fn, fnContext)
-    } catch (e) {
-      return {
-        pass: false,
-        type: 'RuntimeError',
-        error: e,
-        source: _.escape(js_beautify(fn.toString())),
-      }
-    }
-    if (pass) {
+    if (_.isEqual(expectedOutput, output)) {
       return {
         pass: true,
-        source: _.escape(js_beautify(fn.toString())),
+        input: `${fn.name}(${_.escape(JSON.stringify(testCase, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
+        output: _.escape(JSON.stringify(output)),
+        expect: _.escape(JSON.stringify(expectedOutput)),
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
       }
     } else {
       return {
         pass: false,
         type: 'WrongAnswer',
-        source: _.escape(js_beautify(fn.toString())),
+        input: `${fn.name}(${_.escape(JSON.stringify(testCase, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
+        output: _.escape(JSON.stringify(output)),
+        expect: _.escape(JSON.stringify(expectedOutput)),
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
       }
     }
   }
@@ -106,12 +91,27 @@ var test = (function() {
     try {
       var output = fn.apply(fnContext, _.cloneDeep(testCase.input))
     } catch (e) {
+      if (e.type == 'InfiniteLoop') {
+        return {
+          pass: false,
+          type: e.type,
+          input: `${fn.name}(${_.escape(JSON.stringify(testCase.input, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
+          source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
+        }
+      }
+      if (e.type == 'SyntaxError') {
+        return {
+          pass: false,
+          type: e.type,
+          error: e.error,
+        }
+      }
       return {
         pass: false,
         type: 'RuntimeError',
         error: e,
         input: `${fn.name}(${_.escape(JSON.stringify(testCase.input, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
-        source: _.escape(js_beautify(fn.toString())),
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
       }
     }
     if (_.isEqual(output, testCase.output)) {
@@ -120,7 +120,7 @@ var test = (function() {
         input: `${fn.name}(${_.escape(JSON.stringify(testCase.input, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
         output: _.escape(JSON.stringify(output)),
         expect: _.escape(JSON.stringify(testCase.output)),
-        source: _.escape(js_beautify(fn.toString())),
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
       }
     } else {
       return {
@@ -129,7 +129,52 @@ var test = (function() {
         input: `${fn.name}(${_.escape(JSON.stringify(testCase.input, stringifyFunction).match(/^\[(.*)\]$/)[1])})`,
         output: _.escape(JSON.stringify(output)),
         expect: _.escape(JSON.stringify(testCase.output)),
-        source: _.escape(js_beautify(fn.toString())),
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
+      }
+    }
+  }
+
+  /**
+   * 自定义测试函数
+   * 使用场景一般是输出不固定的情况比如输出随机数或者小数
+   * 此时testCase实际上是一个写好的函数，运行这个函数返回true/false得到是否通过测试
+   */
+  function customTest(fn, fnContext, testCase) {
+    var pass = false
+    try {
+      pass = testCase(fn, fnContext)
+    } catch (e) {
+      if (e.type == 'InfiniteLoop') {
+        return {
+          pass: false,
+          type: e.type,
+          source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
+        }
+      }
+      if (e.type == 'SyntaxError') {
+        return {
+          pass: false,
+          type: e.type,
+          error: e.error,
+        }
+      }
+      return {
+        pass: false,
+        type: 'RuntimeError',
+        error: e,
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
+      }
+    }
+    if (pass) {
+      return {
+        pass: true,
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
+      }
+    } else {
+      return {
+        pass: false,
+        type: 'WrongAnswer',
+        source: _.escape(js_beautify(infiniteLoopDetector.unwrap(fn.toString()))),
       }
     }
   }
