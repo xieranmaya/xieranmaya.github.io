@@ -9,6 +9,9 @@ var test = (function() {
         type: 'NotImplemented',
       }]
     }
+    if (!Array.isArray(testCases)) {
+      testCases = testCases.testData
+    }
     return testCases.map(function(testCase) {
       if (Array.isArray(testCase)) {
         return compareTest(fn, fnContext, testCase, base, baseContext)
