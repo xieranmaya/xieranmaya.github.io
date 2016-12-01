@@ -356,6 +356,37 @@
         next: null
       }
     }]
+    testCases.parseJson = [{
+      input: [`"true"`],
+      output: "true"
+    }, {
+      input: [`23`],
+      output: 23
+    }, {
+      input: [`[1,2,3]`],
+      output: [1,2,3]
+    }, {
+      input: [`true`],
+      output: true
+    }, {
+      input: [`null`],
+      output: null
+    }, {
+      input: [`{"a":1}`],
+      output: {a:1}
+    }, {
+      input: [`[{"a":1,"b":true},2]`],
+      output: [{a:1,b:true},2]
+    }, {
+      input: [`{"a":[1,2]}`],
+      output: {a:[1,2]}
+    }, {
+      input: [`[[1,2],[3,4]]`],
+      output: [[1,2],[3,4]]
+    }, {
+      input: [`{"a":{"b":3}}`],
+      output: {a:{b:3}}
+    }, ]
   </script>
 </head>
 <body>
