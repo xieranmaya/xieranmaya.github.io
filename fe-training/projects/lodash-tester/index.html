@@ -6,6 +6,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
   <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/monokai-sublime.css">
   <link rel="stylesheet" href="styles/tester.css">
+  <style>
+    .core-fns {
+      background-color: aqua;
+    }
+  </style>
   <script src="libs/lodash.min.js"></script>
   <script>
     function getImplementerNameFromUrl(url) {
@@ -82,6 +87,190 @@
       return getImplementerNameFromUrl(a.url).toLowerCase() > getImplementerNameFromUrl(b.url).toLowerCase() ? 1 : -1
     })
     // implementations.unshift({url: `https://xieranmaya.github.io/fe-training/projects/lodash-tester/demo/XieDaMiao-${project}.js`})
+  </script>
+  <script>
+    var coreFns = [
+      'keyBy','chunk','pull','fromPairs','fill','isNil','ceil','round',
+      'get','set',
+      'assignIn',
+      'before',
+      'bind',
+      'chain',
+      'clone',
+      'compact',
+      'concat',
+      'create',
+      'defaults',
+      'defer',
+      'delay',
+      'each',
+      'escape',
+      'every',
+      'filter',
+      'find',
+      'flatten',
+      'flattenDeep',
+      'forEach',
+      'has',
+      'head',
+      'identity',
+      'indexOf',
+      'isArguments',
+      'isArray',
+      'isBoolean',
+      'isDate',
+      'isEmpty',
+      'isEqual',
+      'isFinite',
+      'isFunction',
+      'isNaN',
+      'isNull',
+      'isNumber',
+      'isObject',
+      'isRegExp',
+      'isString',
+      'isUndefined',
+      'iteratee',
+      'keys',
+      'last',
+      'map',
+      'matches',
+      'max',
+      'min',
+      'mixin',
+      'negate',
+      'noConflict',
+      'noop',
+      'once',
+      'pick',
+      'reduce',
+      'result',
+      'size',
+      'slice',
+      'some',
+      'sortBy',
+      'tap',
+      'thru',
+      'toArray',
+      'uniqueId',
+      'values',
+    // ]
+
+    // var underscoreFns = [
+      "each",
+      "map",
+      "reduce",
+      "reduceRight",
+      "find",
+      "filter",
+      "where",
+      "findWhere",
+      "reject",
+      "every",
+      "some",
+      "contains",
+      "invoke",
+      "pluck",
+      "max",
+      "min",
+      "sortBy",
+      "groupBy",
+      "indexBy",
+      "countBy",
+      "shuffle",
+      "sample",
+      "toArray",
+      "size",
+      "partition",
+      "first",
+      "initial",
+      "last",
+      "rest",
+      "compact",
+      "flatten",
+      "without",
+      "union",
+      "intersection",
+      "difference",
+      "uniq",
+      "zip",
+      "unzip",
+      "object",
+      "indexOf",
+      "lastIndexOf",
+      "sortedIndex",
+      "findIndex",
+      "findLastIndex",
+      "range",
+      "bind",
+      "bindAll",
+      "partial",
+      "memoize",
+      "delay",
+      "defer",
+      "throttle",
+      "debounce",
+      "once",
+      "after",
+      "before",
+      "wrap",
+      "negate",
+      "compose",
+      "keys",
+      "allKeys",
+      "values",
+      "mapObject",
+      "pairs",
+      "invert",
+      "create",
+      "functions",
+      "findKey",
+      "extend",
+      "extendOwn",
+      "pick",
+      "omit",
+      "defaults",
+      "clone",
+      "tap",
+      "has",
+      "matcher",
+      "property",
+      "propertyOf",
+      "isEqual",
+      "isMatch",
+      "isEmpty",
+      "isElement",
+      "isArray",
+      "isObject",
+      "isArguments",
+      "isFunction",
+      "isString",
+      "isNumber",
+      "isFinite",
+      "isBoolean",
+      "isDate",
+      "isRegExp",
+      "isError",
+      "isNaN",
+      "isNull",
+      "isUndefined",
+      "noConflict",
+      "identity",
+      "constant",
+      "noop",
+      "times",
+      "random",
+      "mixin",
+      "iteratee",
+      "uniqueId",
+      "escape",
+      "unescape",
+      "result",
+      "now",
+      "template",
+      "chain",
+      "value",
+    ]
   </script>
   <script type="notrun" data-comment="人肉整理的测试数据">
     var testCases = {
@@ -727,7 +916,18 @@ $(function() {
       // _.forOwn(_, function(fn, methodName) {// 开始测某一个方法是否正确，按方法在lodash里面出现的顺序测
       Object.keys(testCases).forEach((methodName, index) => {// 按照testCases里面的顺序测试
         setTimeout(function() {
-          $('#result-body').append(`<tr><th><a title="${testCases[methodName].description}" target="_blank" href="https://lodash.com/docs/#${methodName}">${methodName}</a></th></tr>`)
+          $('#result-body').append(`
+            <tr>
+              <th class="${coreFns.includes(methodName) ? 'core-fns' : ''}">
+                <a
+                  title="${testCases[methodName].description}"
+                  target="_blank"
+                  href="https://lodash.com/docs/#${methodName}"
+                >
+                  ${methodName}
+                </a>
+              </th>
+            </tr>`)
         }, timeout++*timegap)
         new function() {
           let fn = _[methodName]
