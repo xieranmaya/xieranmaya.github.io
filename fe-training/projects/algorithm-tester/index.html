@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>大喵教育前端培训</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+    a:link {
+      color: #0074D9;
+      text-decoration: none;
+    }
+    a:visited {
+      color: #0074D9;
+    }
+    a:hover {
+      color: #001f3f;
+    }
+    .result-table {
+      /*width: 100%;*/
+      margin: auto;
+      overflow: hidden;
+      border-collapse: collapse;
+    }
+    .unimplemented {
+      background-color: rgba(170,170,170,.5);
+    }
+    .pass {
+      background-color: rgba(46,204,64,.5);
+    }
+    .unpass {
+      background-color: rgba(255,255,0,.5);
+    }
+    .error {
+      background-color: rgba(255,65,54,.5);
+    }
+    .result-table tr:hover td{
+      /*background-color: transparent;*/
+    }
+    tr:nth-child(2) th {
+      width: 5em;
+      max-width: 5em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    td {
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+      /*border: 2px solid;*/
+    }
+    td:hover {
+      border: 1px solid #001f3f;
+    }
+    td:hover::before,
+    td:hover::after {
+      content: '';
+      width: 100%;
+      height: 999999px;
+      position: absolute;
+      left: 0;
+      top: -9999px;
+      background-color: rgba(0,0,0,0.2);
+      pointer-events: none;
+      z-index: -5;
+    }
+    td:hover::before {
+      height: 100%;
+      width: 99999px;
+      top: 0;
+      left: -9999px;
+    }
+    th {
+      /*background-color: black;*/
+      /*color: white;*/
+    }
+  </style>
+  <script>
+    var testObjectName = 'Algorithm'//将要测试的基准对象名字
+
+    function getImplementerNameFromUrl(url) {
+      var parts = url.split('/')
+      var fileName = parts[parts.length - 1]
+      var customLodashName = fileName.match(/(.*)-algorithm\.js/)[1]
+      return customLodashName
+    }
+    var getName = getImplementerNameFromUrl
+  </script>
+  <script>
+    var implementations = [{
+      // url: 'https://dongliang1993.github.io/DongLiang-lodash.js',
+    }, {
+      // url: 'https://jeane-zz.github.io/ZhangDZ-lodash.js',
+    }, {
+      // url: 'https://grassrootscoder.github.io/TianXiaoBo-lodash.js',
+    }, {
+      // url: 'https://guanyubeing.github.io/GuanYu-lodash.js',
+    }, {
+      // url: 'https://alisa666.github.io/Gebin-lodash.js',
+    }, {
+      // url: 'https://linlekai.github.io/LinLeKai-lodash.js',
+    }, {
+      // url: 'https://wangyulong666.github.io/WangYuLong-lodash.js',
+    }, {
+      // url: 'https://li-z.github.io/LiZhi-lodash.js',
+    }, {
+      // url: 'https://incisa.github.io/my-lodash/YuLei-lodash.js',
+    }, {
+      // url: 'https://julywz.github.io/my-lodash/WuFang-lodash.js',
+    }, {
+      // url: 'https://iotgtkol.github.io/LiuWei-lodash.js',
+    }, {
+      // url: 'https://jianglinghao.github.io/JiangLingHao-lodash.js',
+    }, {
+      // url: 'https://titancx.github.io/CaiQinChen-lodash.js',
+    }, {
+      // url: 'https://gongqiyi.github.io/FangTianYi-lodash.js',
+    }, {
+      // url: 'https://moolan-d.github.io/SunGaoJie-lodash.js',
+    }, {
+      // url: 'https://nostalgia0320.github.io/GuoJunChao-lodash.js',
+    }, {
+      // url: 'https://zhuangfeilong.github.io/ZhuangFeiLong-lodash.js',
+    }, {
+      // url: 'https://gaogao-li.github.io/LiGaoWei-lodash.js',
+    }, {
+      // url: 'https://shenxiaobai.github.io/ShenXiaoBai-lodash.js',
+    }, {
+      // url: 'https://theworld1992.github.io/WangYaWei-lodash.js',
+    }, {
+      // url: 'https://therunwolf.github.io/ShiFangHong-lodash.js',
+    }, {
+      url: 'implementations/XieRan-algorithm.js',
+    }].filter(it=>it.url).sort((a,b) => {
+      return getName(a.url).toLowerCase() > 
+        getName(b.url).toLowerCase() ? 1 : -1
+    })
+
+    var testCases = {
+      dellTo3355: [
+        ['dell'],
+        ['implementations'],
+        ['alienware'],
+      ],
+      monkeyKing: [
+        [11,8],
+        [25,6],
+        [45,9],
+      ]
+    }
+  </script>
+</head>
+<body>
+  <h1>大喵教育前端培训编程基础测试平台实时数据</h1>
+  <table border=1 class="result-table">
+    <tbody id="result-body">
+      <tr>
+        <th>0</th>
+        <script>
+          implementations.map((it, index) => {
+            document.write(`<th>${index+1}</th>`)
+          })
+        </script>
+      </tr>
+      <tr>
+        <th><a target="_blank" href="https://lodash.com/docs/" title="点击直达文档首页">函数名</a></th>
+        <script>
+          implementations.map(it => {
+            document.write(`
+              <th title="${getImplementerNameFromUrl(it.url)}">
+              <a target="_blank" href="${it.url}">${getImplementerNameFromUrl(it.url)}</a>
+              </th>
+            `)
+          })
+        </script>
+      </tr>
+    </tbody>
+  </table>
+</body>
+<script src="libs/algorithm.js"></script>
+<script src="libs/lodash.min.js"></script>
+<script src="libs/jquery-3.1.1.min.js"></script>
+<script src="libs/beautify.js"></script>
+<script>
+$(function() {
+  // debugger
+  var customLodashNames = implementations
+    .filter(it => it.url)
+    .map(it => it.url)
+    .map(getImplementerNameFromUrl)
+
+  console.log(customLodashNames)
+
+  var eagerForImplementationText = [
+    '我在这儿等着你实现呀等着你实现，快来实现我~~~',
+    '快来实现我呀，程序员MM/GG',
+    '再不实现我，就把你的电脑吃掉！',
+    'Hello World!',
+    '现在写的程序，就是以后工资卡上的工资！',
+    '不会写就查文档！！！',
+    '现在不实现我，以后可就没机会了哦~',
+    '没有人来实现我，我好寂寞...',
+    '快来和我玩',
+    '不要等到面试的时候再后悔哦',
+  ]
+
+  Promise.all(implementations.map(it=>it.url).map(loadScript))
+    .then(function() {//所有实现都加载完成了
+      _.forOwn(window[testObjectName], function(fn, methodName, lodash) {// 开始测某一个方法是否正确
+        var testCase// 测试数据
+        var lodashReturnValue//lodash的返回值
+        var customReturnValue//自己实现的返回值
+        var testResult//测试结果
+        var customFunctions//所有人自己实现的函数
+        var inputAndOutput//程序的输入与输出
+        var sourceCode//函数源代码
+        var input//函数的输入
+        var inputOutputAndSourceCode//输入输出与源代码
+        if (testCases.hasOwnProperty(methodName)) { //有测试数据才测
+          // debugger
+          testCase = _.cloneDeep(testCases[methodName][0])//先只测一个数据
+          lodashReturnValue = fn.apply(window[testObjectName], testCase)
+          customLodashs = customLodashNames.map(name=>window[name])
+          customFunctions = customLodashNames.map(name=>window[name][methodName])
+          testResult = customFunctions
+            .map((customMethod,index) => {
+              if (!_.isFunction(customMethod)) {
+                return `<td class="unimplemented" title="${_.sample(eagerForImplementationText)}">未实现</td>`
+              } else {
+                try {
+                  customReturnValue = customMethod.apply(customLodashs[index], _.cloneDeep(testCase))
+                  input = _.escape(methodName+'('+JSON.stringify(testCase).match(/\[(.*)\]/)[1])+')'
+                  inputAndOutput = `输入：${input}\n输出：${_.escape(JSON.stringify(customReturnValue))}`
+                  sourceCode = _.escape(js_beautify(customMethod.toString(), {}))
+                  inputOutputAndSourceCode = `${inputAndOutput}\n源码：\n${sourceCode}`
+                  if (_.isEqual(lodashReturnValue, customReturnValue)) {
+                    return `<td class="pass" title="${inputOutputAndSourceCode}">通过</td>`
+                  } else {
+                    return `<td class="unpass" title="${inputOutputAndSourceCode}">未通过</td>`
+                  }
+                } catch(e) {
+                  return `<td class="error" title="错误：${e}\n源码：\n${sourceCode}">运行错误</td>`
+                }
+              }
+            }).join('')
+          testResult = `<tr><th><a target="_blank" href="https://lodash.com/docs/#${methodName}">${methodName}</a></th>${testResult}</tr>`
+          $('#result-body').append(testResult)
+        }
+      })
+    })
+})
+
+function loadScript(src) {
+  return new Promise(function(resolve,reject) {
+    var script = document.createElement('script')
+    script.src = src
+    document.body.appendChild(script)
+    script.onload = resolve
+    script.onerror = resolve
+  })
+}
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2243d09d24f5e80836f6b9d3a08d9fb0";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</html>

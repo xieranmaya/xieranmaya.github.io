@@ -103,8 +103,9 @@
 ## 有干货的实践项目
 
 - 初步实现 jQuery
-- 初步实现 lodash
-- 用 JavaScript 实现一个 JSON Parser
+- 初步实现 Lodash
+- 初步实现 Sizzle
+- 用 JavaScript 实现一个 JSON 解析器
 - 使用 Node 实现与 Github Pages 同等功能的 HTTP 服务器
 - 初步实现 Express
 - 实现 Promise
