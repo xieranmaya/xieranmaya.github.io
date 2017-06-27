@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    section {
+      width: 200px;
+      height: 250px;
+      border: 5px solid;
+      position: relative;/*为了伪元素相对于其定位*/
+      margin: 200px;
+    }
+    section::before {
+      content: '.';
+      background-image: inherit;/*直接从父元素继承背景图片，这样可以直接用react层传入图片url*/
+      position: absolute;
+      left: 50%;/*先把伪元素的左上解偏移到父元素的中心点*/
+      top: 50%;/*先把伪元素的左上解偏移到父元素的中心点*/
+
+      width: 200px;/*需要旋转0和180度的伪元素，其【宽高】跟父元素一样*/
+      height: 250px;/*需要旋转0和180度的伪元素，其【宽高】跟父元素一样*/
+  
+      /*把下面两行解除注释可将伪元素与父元素中心对齐*/
+
+      /*margin-left: -100px;
+      margin-top: -125px;*/
+
+      box-shadow: 0px 0px 2px red;
+      background-size: cover;
+      background-position: center;
+    }
+    section.r::before,
+    section.l::before {
+      width: 250px;/*需要旋转0和180度的伪元素，其【高宽】跟父元素一样*/
+      height: 200px;/*需要旋转0和180度的伪元素，其【高宽】跟父元素一样*/
+        
+
+      /*把下面两行解除注释可将伪元素与父元素中心对齐*/
+
+      /*margin-left: -125px;
+      margin-top: -100px;*/
+
+    }
+    section.u::before {
+      transform: rotate(0deg);/*不同元素旋转角度不一样*/
+    }
+    section.r::before {
+      transform: rotate(-90deg);/*不同元素旋转角度不一样*/
+    }
+    section.d::before {
+      transform: rotate(-180deg);/*不同元素旋转角度不一样*/
+    }
+    section.l::before {
+      transform: rotate(-270deg);/*不同元素旋转角度不一样*/
+    }
+  </style>
+</head>
+<body>
+  <h2>黑框是父元素，红框是相应父元素的伪元素</h2>
+  <p>父元素内显示的是图片的真实效果</p>
+  <p>伪元素内显示的是图片期望的旋转效果</p>
+  <section class="u" style="background-image: url(u.png)"></section>
+  <section class="r" style="background-image: url(r.png)"></section>
+  <section class="d" style="background-image: url(d.png)"></section>
+  <section class="l" style="background-image: url(l.png)"></section>
+  <footer>for yxx</footer>
+</body>
+</html>
