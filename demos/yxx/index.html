@@ -21,11 +21,6 @@
       width: 200px;/*需要旋转0和180度的伪元素，其【宽高】跟父元素一样*/
       height: 250px;/*需要旋转0和180度的伪元素，其【宽高】跟父元素一样*/
   
-      /*把下面两行解除注释可将伪元素与父元素中心对齐*/
-
-      /*margin-left: -100px;
-      margin-top: -125px;*/
-
       box-shadow: 0px 0px 2px red;
       background-size: cover;
       background-position: center;
@@ -34,25 +29,18 @@
     section.l::before {
       width: 250px;/*需要旋转0和180度的伪元素，其【高宽】跟父元素一样*/
       height: 200px;/*需要旋转0和180度的伪元素，其【高宽】跟父元素一样*/
-        
-
-      /*把下面两行解除注释可将伪元素与父元素中心对齐*/
-
-      /*margin-left: -125px;
-      margin-top: -100px;*/
-
     }
     section.u::before {
-      transform: rotate(0deg);/*不同元素旋转角度不一样*/
+      transform: translate(-50%, -50%) rotate(0deg);/*不同元素旋转角度不一样*/
     }
     section.r::before {
-      transform: rotate(-90deg);/*不同元素旋转角度不一样*/
+      transform: translate(-50%, -50%) rotate(-90deg);/*不同元素旋转角度不一样*/
     }
     section.d::before {
-      transform: rotate(-180deg);/*不同元素旋转角度不一样*/
+      transform: translate(-50%, -50%) rotate(-180deg);/*不同元素旋转角度不一样*/
     }
     section.l::before {
-      transform: rotate(-270deg);/*不同元素旋转角度不一样*/
+      transform: translate(-50%, -50%) rotate(-270deg);/*不同元素旋转角度不一样*/
     }
   </style>
 </head>
