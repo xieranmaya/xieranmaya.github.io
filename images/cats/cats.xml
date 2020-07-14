@@ -1,0 +1,24 @@
+<?xml version="1.0">
+<cats>
+  <cat>
+    <url value="photo-103450229.jpg" />
+    <size>
+      <width>675</width>
+      <height>900</height>
+    </size>
+  </cat>
+  <cat>
+    <url value="photo-108273877.jpg" />
+    <size>
+      <width>1170</width>
+      <height>780</height>
+    </size>
+  </cat>
+  <cat>
+    <url value="photo-115203323.jpg" />
+    <size>
+      <width>1170</width>
+      <height>780</height>
+    </size>
+  </cat>
+</cats>
