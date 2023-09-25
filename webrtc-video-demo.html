@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com/"></script>
+</head>
+<body class="m-2">
+
+  <div>
+    <div class="flex items-center">
+      <span class="shrink-0 w-16 text-right">Nick：</span>
+      <input class="border-2 h-10 rounded-md outline-none p-2 w-full" size="30" type="text" id="myId">
+      <button class=" w-24 shrink-0 h-10 bg-slate-900 text-white ml-2 px-2 py-2 rounded-md" onclick="changeNick()">Change</button>
+    </div>
+
+    <div class="flex my-2 items-center">
+      <span class="shrink-0 w-16 text-right">Friend：</span>
+      <input class="border-2 h-10 rounded-md outline-none p-2 w-full" size="30" type="text" id="otherId">
+      <button class="shrink-0 w-24 bg-slate-900 h-10 text-white px-2 py-2 ml-2 rounded-md" onclick="call()">Call</button>
+    </div>
+
+    <div class="relative">
+      <video class="w-full" id="video" controls></video>
+      <video class="absolute top-0 left-0 max-w-24 max-h-24" id="myVideo" controls></video>
+    </div>
+
+    <div id="info"></div>
+
+  </div>
+
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <script>
+    var nick = prompt('请输入你的昵称，只能为英文，不要为空')
+    var perfix = 'webrtc-demo-test-id-prefix-'
+    var id = perfix + nick
+    var peer = new Peer(id)
+
+    peer.on('open', () => {
+      myId.value = peer.id.slice(perfix.length)
+    })
+
+    peer.on('disconnected', () => {
+      myId.value = '断开了，正在重连'
+      peer.reconnect()
+    })
+
+    video.onloadedmetadata = function(e) {
+      video.play()
+    }
+    myVideo.onloadedmetadata = function(e) {
+      myVideo.play()
+      myVideo.volume = 0
+    }
+
+    function changeNick() {
+      location.reload()
+    }
+
+    var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+    peer.on('call', function(call) {
+      getUserMedia({video: true, audio: true}, function(stream) {
+        call.answer(stream) // Answer the call with an A/V stream.
+        myVideo.srcObject = stream
+        call.on('stream', function(remoteStream) {
+          // Show stream in some video/canvas element.
+          console.log('2', remoteStream)
+          video.srcObject = (remoteStream)
+        });
+
+      }, function(err) {
+        info.innerHTML += ('Failed to get local stream: ' + err) + '<br>'
+        console.log(err)
+      })
+    })
+
+    function call() {
+      getUserMedia({video: true, audio: true}, function(stream) {
+        var call = peer.call(perfix + otherId.value, stream)
+
+        myVideo.srcObject = stream
+
+        call.on('stream', function(remoteStream) {
+          // Show stream in some video/canvas element.
+          console.log('1', remoteStream)
+          video.srcObject = (remoteStream)
+        });
+      }, function(err) {
+        info.innerHTML += ('Failed to get local stream: ' + err) + '<br>'
+        console.log(err)
+      })
+    }
+  </script>
+</body>
+</html>
